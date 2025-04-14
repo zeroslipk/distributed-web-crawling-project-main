@@ -3,14 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crawl Website</title>
+    <title>Distributed Web Crawler</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container { max-width: 800px; }
+        .status-card { margin: 20px 0; }
+        #searchResults { margin-top: 20px; }
+    </style>
 </head>
 <body>
-    <h1>Web Crawler</h1>
-    <form method="POST" action="/crawl">
-        <label for="url">Enter URL to Crawl:</label>
-        <input type="text" id="url" name="url" required>
-        <button type="submit">Start Crawling</button>
-    </form>
+    <div class="container mt-5">
+        <h1 class="mb-4">Distributed Web Crawler</h1>
+        
+        <!-- Crawl Configuration Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Start New Crawl</h5>
+            </div>
+            <div class="card-body">
+                <form id="crawlForm">
+                    <div class="mb-3">
+                        <label for="urls" class="form-label">Seed URLs (one per line)</label>
+                        <textarea class="form-control" id="urls" name="urls" rows="3" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="depth" class="form-label">Max Depth</label>
+                                <input type="number" class="form-control" id="depth" name="depth" value="3" min="1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="limit" class="form-label">Pages per Domain</label>
+                                <input type="number" class="form-control" id="limit" name="limit" value="1000" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="delay" class="form-label">Crawl Delay (seconds)</label>
+                                <input type="number" class="form-control" id="delay" name="delay" value="1.0" step="0.1" min="0.1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="nodes" class="form-label">Number of Nodes</label>
+                                <input type="number" class="form-control" id="nodes" name="nodes" value="3" min="3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="allowed_domains" class="form-label">Allowed Domains (comma-separated)</label>
+                        <input type="text" class="form-control" id="allowed_domains" name="allowed_domains">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="respect_robots" name="respect_robots" checked>
+                        <label class="form-check-label" for="respect_robots">Respect robots.txt</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Start Crawl</button>
+                    <button type="button" id="stopCrawl" class="btn btn-danger">Stop Crawl</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Crawl Status -->
+        <div class="card status-card">
+            <div class="card-header">
+                <h5 class="mb-0">Crawl Status</h5>
+            </div>
+            <div class="card-body" id="statusContent">
+                <p>No crawl in progress</p>
+            </div>
+        </div>
+
+        <!-- Search Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Search Indexed Content</h5>
+            </div>
+            <div class="card-body">
+                <form id="searchForm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="query" name="query" placeholder="Enter search query" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <select class="form-select" id="field" name="field">
+                                    <option value="content">Content</option>
+                                    <option value="title">Title</option>
+                                    <option value="url">URL</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update status every 5 seconds
+        function updateStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('statusContent').innerHTML = `<p class="text-danger">${data.error}</p>`;
+                    } else if (data.status === 'No crawl in progress') {
+                        document.getElementById('statusContent').innerHTML = `<p>${data.status}</p>`;
+                    } else {
+                        document.getElementById('statusContent').innerHTML = `
+                            <p><strong>Queue Size:</strong> ${data.queue.length}</p>
+                            <p><strong>Completed URLs:</strong> ${data.completed.length}</p>
+                            <p><strong>Failed URLs:</strong> ${data.failed.length}</p>
+                            <p><strong>Total Unique URLs:</strong> ${data.seen_urls.length}</p>
+                            <p><strong>Last Updated:</strong> ${data.timestamp}</p>
+                        `;
+                    }
+                });
+        }
+        setInterval(updateStatus, 5000);
+        updateStatus();
+
+        // Handle crawl form submission
+        document.getElementById('crawlForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/start_crawl', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Crawl started successfully');
+                    updateStatus();
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            });
+        });
+
+        // Handle stop crawl button
+        document.getElementById('stopCrawl').addEventListener('click', function() {
+            fetch('/stop_crawl', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                updateStatus();
+            });
+        });
+
+        // Handle search form submission
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/search', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('searchResults');
+                if (data.error) {
+                    resultsDiv.innerHTML = `<p class="text-danger mt-3">${data.error}</p>`;
+                } else if (data.length === 0) {
+                    resultsDiv.innerHTML = '<p class="mt-3">No results found</p>';
+                } else {
+                    let html = '<div class="mt-3"><h6>Search Results:</h6>';
+                    data.forEach((result, i) => {
+                        html += `
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <h6 class="card-title">${i + 1}. ${result.title}</h6>
+                                    <p class="card-text"><a href="${result.url}" target="_blank">${result.url}</a></p>
+                                    <p class="card-text"><small class="text-muted">Score: ${result.score.toFixed(2)} | Indexed: ${result.timestamp}</small></p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    resultsDiv.innerHTML = html;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
