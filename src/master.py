@@ -11,7 +11,6 @@ from queue import Queue, Empty
 import os
 import sys
 
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -47,9 +46,14 @@ class CrawlState:
     def should_crawl_domain(self, domain):
         """Check if domain is allowed based on configuration"""
         allowed_domains = self.config.get('allowed_domains')
-        if not allowed_domains or not allowed_domains[0]:  # If empty list or empty string
+        # If allowed_domains is None or empty, allow all domains
+        if not allowed_domains or all(not d for d in allowed_domains):
             return True
         return domain in allowed_domains
+
+    def can_crawl_domain(self, domain):
+        """Check if domain has not reached max_pages_per_domain"""
+        return self.domain_counts[domain] < self.config['max_pages_per_domain']
 
 class WorkerMonitor:
     def __init__(self, timeout=30):
@@ -100,15 +104,22 @@ def save_current_state(state):
 def cleanup_state():
     """Clean up all state and files"""
     try:
+        # Close logging handlers
+        logging.shutdown()
+        
         # Delete state files
         if os.path.exists('crawl_state.json'):
             os.remove('crawl_state.json')
-        #if os.path.exists('master.log'):
-            #os.remove('master.log')
         if os.path.exists('crawler.log'):
-            os.remove('crawler.log')
+            try:
+                os.remove('crawler.log')
+            except Exception as e:
+                logging.error(f"Could not delete crawler.log: {e}")
         if os.path.exists('indexer.log'):
-            os.remove('indexer.log')
+            try:
+                os.remove('indexer.log')
+            except Exception as e:
+                logging.error(f"Could not delete indexer.log: {e}")
         
         # Clear all state
         if 'state' in globals():
@@ -133,7 +144,6 @@ def signal_handler(signum, frame):
     cleanup_state()
     sys.exit(0)
 
-# Register signal handlers
 signal.signal(signal.SIGTERM, signal_handler)
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -151,7 +161,6 @@ def check_worker_health():
     for rank in list(state.available_workers):
         if rank not in state.worker_stats:
             continue
-            
         last_heartbeat = state.worker_stats[rank]['last_heartbeat']
         if last_heartbeat and (current_time - last_heartbeat) > monitor.timeout:
             logging.warning(f"Worker {rank} appears to have failed")
@@ -169,6 +178,33 @@ def handle_crawler_failure(failed_rank):
     
     state.available_workers.discard(failed_rank)
     state.worker_stats[failed_rank]['status'] = 'failed'
+
+def prune_queue_and_in_progress(state):
+    """Remove URLs from queue and in_progress if domain limit is reached"""
+    # Prune url_queue
+    pruned_queue = deque()
+    while state.url_queue:
+        url = state.url_queue.popleft()
+        domain = urlparse(url).netloc
+        if state.can_crawl_domain(domain) and state.should_crawl_domain(domain):
+            pruned_queue.append(url)
+        else:
+            state.seen_urls.add(url)  # Mark as seen to avoid re-adding
+            logging.info(f"Pruned URL {url} from queue (domain {domain} limit reached or not allowed)")
+    state.url_queue = pruned_queue
+
+    # Prune in_progress
+    with state.in_progress_lock:
+        for url in list(state.in_progress.keys()):
+            domain = urlparse(url).netloc
+            if not state.can_crawl_domain(domain) or not state.should_crawl_domain(domain):
+                worker_rank, _ = state.in_progress[url]
+                del state.in_progress[url]
+                if worker_rank in state.worker_tasks:
+                    del state.worker_tasks[worker_rank]
+                state.available_workers.add(worker_rank)
+                state.failed.add(url)
+                logging.info(f"Pruned URL {url} from in_progress (domain {domain} limit reached or not allowed)")
 
 def master_process():
     """
@@ -230,16 +266,34 @@ def master_process():
     state.worker_tasks.clear()
     logging.info("Cleared all existing crawl state")
     
-    # Add seed URLs to queue
+    # Add seed URLs to queue, respecting max_pages_per_domain
     for url in seed_urls:
         if url not in state.seen_urls:
-            state.url_queue.append(url)
-            state.seen_urls.add(url)
             domain = urlparse(url).netloc
-            state.domain_counts[domain] += 1
+            if state.can_crawl_domain(domain) and state.should_crawl_domain(domain):
+                state.url_queue.append(url)
+                state.seen_urls.add(url)
+                state.domain_counts[domain] += 1
+                logging.info(f"Added seed URL {url} for domain {domain}")
+            else:
+                logging.info(f"Skipped seed URL {url} (domain {domain} limit reached or not allowed)")
 
     # Main loop
     while state.url_queue or state.in_progress:
+        # Prune queue and in_progress to respect domain limits
+        prune_queue_and_in_progress(state)
+
+        # Check if all domains have reached their limit
+        all_domains_done = True
+        for url in list(state.url_queue) + list(state.in_progress.keys()):
+            domain = urlparse(url).netloc
+            if state.can_crawl_domain(domain) and state.should_crawl_domain(domain):
+                all_domains_done = False
+                break
+        if all_domains_done and not state.url_queue and not state.in_progress:
+            logging.info("All domains have reached max_pages_per_domain or are not allowed. Terminating crawl.")
+            break
+
         # Check for messages from workers
         if comm.Iprobe(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status):
             source_rank = status.Get_source()
@@ -255,13 +309,18 @@ def master_process():
                 new_urls = message
                 for url in new_urls:
                     if isinstance(url, dict):
-                        url = url['url']  # Extract URL from dictionary if needed
+                        url = url['url']
                     if url not in state.seen_urls:
                         domain = urlparse(url).netloc
-                        if state.domain_counts[domain] < state.config['max_pages_per_domain']:
+                        if (state.can_crawl_domain(domain) and 
+                            state.should_crawl_domain(domain)):
                             state.url_queue.append(url)
                             state.seen_urls.add(url)
-                            state.domain_counts[domain] += 1
+                            # Do not increment domain_counts here; increment when crawled
+                            logging.info(f"Queued new URL {url} for domain {domain}")
+                        else:
+                            state.seen_urls.add(url)
+                            logging.info(f"Skipped URL {url} (domain {domain} limit reached or not allowed)")
 
             elif tag == 99:  # Status update
                 if isinstance(message, dict):
@@ -275,7 +334,10 @@ def master_process():
                             state.available_workers.add(source_rank)
                             if source_rank in state.worker_tasks:
                                 del state.worker_tasks[source_rank]
-                            logging.info(f"URL {url} marked as completed, completed count: {len(state.completed)}")
+                            # Increment domain_counts when URL is completed
+                            domain = urlparse(url).netloc
+                            state.domain_counts[domain] += 1
+                            logging.info(f"URL {url} marked as completed, completed count: {len(state.completed)}, domain {domain} count: {state.domain_counts[domain]}")
                         else:
                             logging.warning(f"URL {url} not found in in_progress dictionary")
 
@@ -291,9 +353,17 @@ def master_process():
 
         # Assign URLs to available workers
         while state.url_queue and state.available_workers:
-            url = state.url_queue.popleft()
-            worker_rank = min(state.available_workers)  # Simple round-robin assignment
-            assign_url_to_crawler(url, worker_rank)
+            url = state.url_queue[0]  # Peek at the first URL
+            domain = urlparse(url).netloc
+            if state.can_crawl_domain(domain) and state.should_crawl_domain(domain):
+                url = state.url_queue.popleft()
+                worker_rank = min(state.available_workers)  # Simple round-robin
+                assign_url_to_crawler(url, worker_rank)
+            else:
+                # Remove URL if its domain is not crawlable
+                state.url_queue.popleft()
+                state.seen_urls.add(url)
+                logging.info(f"Removed URL {url} from queue (domain {domain} limit reached or not allowed)")
 
         # Check worker health
         check_worker_health()
@@ -322,6 +392,5 @@ if __name__ == '__main__':
         logging.error(f"Error in master process: {e}")
         cleanup_state()
     finally:
-        # Ensure final state is saved
         if 'state' in locals():
             cleanup_state()

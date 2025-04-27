@@ -162,8 +162,14 @@ class WebCrawler:
 
 def cleanup_crawler():
     try:
+        # Close logging handlers
+        logging.shutdown()
+        
         if os.path.exists('crawler.log'):
-            os.remove('crawler.log')
+            try:
+                os.remove('crawler.log')
+            except Exception as e:
+                logging.error(f"Could not delete crawler.log: {e}")
         logging.info("Crawler cleanup completed")
     except Exception as e:
         logging.error(f"Error during cleanup: {e}")
@@ -181,32 +187,39 @@ def crawler_process():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
-    while True:
-        if comm.Iprobe(source=0, tag=MPI.ANY_TAG):
-            message = comm.recv(source=0)
+    try:
+        while True:
+            if comm.Iprobe(source=0, tag=MPI.ANY_TAG):
+                message = comm.recv(source=0)
 
-            if isinstance(message, dict) and message.get('command') == 'shutdown':
-                logging.info("Received shutdown command from master")
-                loop.run_until_complete(crawler.close_session())
-                cleanup_crawler()
-                break
+                if isinstance(message, dict) and message.get('command') == 'shutdown':
+                    logging.info("Received shutdown command from master")
+                    loop.run_until_complete(crawler.close_session())
+                    cleanup_crawler()
+                    break
 
-            if isinstance(message, dict) and 'url' in message:
-                url = message['url']
-                depth = message.get('depth', 0)
-                logging.info(f"Crawler {rank} crawling {url} at depth {depth}")
+                if isinstance(message, dict) and 'url' in message:
+                    url = message['url']
+                    depth = message.get('depth', 0)
+                    logging.info(f"Crawler {rank} crawling {url} at depth {depth}")
 
-                links, content = loop.run_until_complete(crawler.crawl_url(url, depth))
+                    links, content = loop.run_until_complete(crawler.crawl_url(url, depth))
 
-                if content:
-                    comm.send({'url': url, 'content': content['text'], 'meta': content}, dest=size-1, tag=2)
-                    logging.info(f"Sent content for {url} to indexer")
+                    if content:
+                        comm.send({'url': url, 'content': content}, dest=size-1, tag=2)
+                        logging.info(f"Sent content for {url} to indexer")
 
-                if links:
-                    comm.send([{'url': link, 'depth': depth + 1} for link in links], dest=0, tag=1)
-                    logging.info(f"Sent {len(links)} new URLs from {url} to master")
+                    if links:
+                        comm.send([{'url': link, 'depth': depth + 1} for link in links], dest=0, tag=1)
+                        logging.info(f"Sent {len(links)} new URLs from {url} to master")
 
-                comm.send({'url': url, 'status': 'completed'}, dest=0, tag=99)
+                    comm.send({'url': url, 'status': 'completed'}, dest=0, tag=99)
+    except Exception as e:
+        logging.error(f"Crawler crashed: {e}")
+        loop.run_until_complete(crawler.close_session())
+        cleanup_crawler()
+    finally:
+        loop.close()
 
 def start_crawler():
     try:

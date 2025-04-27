@@ -1,10 +1,13 @@
 import os
 import sys
 import logging
+import logging.handlers
 
 # -------- CLEAR OLD LOGS FIRST -------- #
 def clear_old_logs():
     """Delete previous log files if they exist"""
+    logging.shutdown()
+    
     logs = ['master.log', 'indexer.log', 'crawler.log']
     for log_file in logs:
         if os.path.exists(log_file):
@@ -14,11 +17,11 @@ def clear_old_logs():
             except Exception as e:
                 print(f"Could not delete {log_file}: {e}")
 
-clear_old_logs()  # <--- IMPORTANT: run before MPI is even imported!
+clear_old_logs()
 
 # -------------------------------------- #
 
-from mpi4py import MPI  # NOW import mpi4py after clearing logs
+from mpi4py import MPI
 
 def setup_logging(process_type):
     """Setup logging for each process type"""
@@ -52,9 +55,7 @@ def main():
     else:
         setup_logging('Crawler')
         from crawler import crawler_process
-        import asyncio
-        asyncio.run(crawler_process())
+        crawler_process()  # Call directly, as crawler_process manages its own event loop
 
 if __name__ == '__main__':
     main()
-

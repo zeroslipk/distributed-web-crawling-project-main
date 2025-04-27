@@ -126,8 +126,14 @@ def check_search_requests():
 
 def cleanup_indexer():
     try:
+        # Close logging handlers
+        logging.shutdown()
+        
         if os.path.exists('indexer.log'):
-            os.remove('indexer.log')
+            try:
+                os.remove('indexer.log')
+            except Exception as e:
+                logging.error(f"Could not delete indexer.log: {e}")
         
         logging.info("Indexer cleanup completed")
     except Exception as e:

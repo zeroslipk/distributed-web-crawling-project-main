@@ -3,11 +3,11 @@
     "https://demo.testfire.net/"
   ],
   "max_depth": 3,
-  "max_pages_per_domain": 2,
+  "max_pages_per_domain": 5,
   "respect_robots": false,
   "crawl_delay": 1.0,
   "allowed_domains": [
-    ""
+    "demo.testfire.net"
   ],
-  "start_time": "2025-04-27T20:26:02.905735"
+  "start_time": "2025-04-27T21:58:18.721624"
 }
