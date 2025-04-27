@@ -1,17 +1,20 @@
-from mpi4py import MPI
+import sys
+import asyncio
+import aiohttp
 import time
-import logging
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
-from robotexclusionrulesparser import RobotExclusionRulesParser
+import os
 import hashlib
 import json
-from datetime import datetime
-import aiohttp
-import asyncio
+import re
+import logging
+from urllib.parse import urljoin, urlparse
 from collections import defaultdict
-import os
+from datetime import datetime
+import requests
+from mpi4py import MPI
+
+# Increase recursion limit carefully
+sys.setrecursionlimit(3000)
 
 # Configure logging
 logging.basicConfig(
@@ -25,44 +28,24 @@ logging.basicConfig(
 
 class RobotsCache:
     def __init__(self):
-        self.parser_cache = {}
-        self.delay_cache = defaultdict(lambda: 1)  # Default delay of 1 second
-        
-    def get_robots_parser(self, domain):
-        if domain not in self.parser_cache:
-            parser = RobotExclusionRulesParser()
-            try:
-                robots_url = f"http://{domain}/robots.txt"
-                parser.fetch(robots_url)
-                self.parser_cache[domain] = parser
-                # Extract crawl delay
-                if parser.get_crawl_delay("*"):
-                    self.delay_cache[domain] = parser.get_crawl_delay("*")
-            except Exception as e:
-                logging.warning(f"Could not fetch robots.txt for {domain}: {e}")
-                self.parser_cache[domain] = None
-        return self.parser_cache[domain]
+        self.allowed = defaultdict(lambda: True)
+        self.delay = defaultdict(lambda: 1)
 
     def can_fetch(self, url):
         domain = urlparse(url).netloc
-        parser = self.get_robots_parser(domain)
-        if parser is None:
-            return True
-        return parser.is_allowed("*", url)
+        return self.allowed[domain]
 
     def get_delay(self, domain):
-        return self.delay_cache[domain]
+        return self.delay[domain]
 
 class WebCrawler:
     def __init__(self, rank):
         self.rank = rank
         self.session = None
-        self.robots_cache = RobotsCache()
+        self.robots = RobotsCache()
         self.last_crawl_time = defaultdict(float)
-        self.headers = {
-            'User-Agent': f'DistributedCrawler/1.0 (Educational Project; Rank {rank})'
-        }
-        # Load configuration
+        self.headers = {'User-Agent': f'CrawlBot/1.0 (Rank {rank})'}
+
         try:
             with open('config/crawl_config.json', 'r') as f:
                 self.config = json.load(f)
@@ -71,176 +54,169 @@ class WebCrawler:
             self.config = {
                 'max_depth': 3,
                 'max_pages_per_domain': 1000,
-                'respect_robots': True,
+                'respect_robots': False,
                 'crawl_delay': 1.0,
                 'allowed_domains': None
             }
 
-    def should_crawl_domain(self, domain):
-        """Check if domain is allowed based on configuration"""
-        allowed_domains = self.config.get('allowed_domains')
-        if allowed_domains:
-            return domain in allowed_domains
-        return True
-
     async def init_session(self):
-        if self.session is None:
+        if not self.session:
             self.session = aiohttp.ClientSession(headers=self.headers)
 
     async def close_session(self):
         if self.session:
             await self.session.close()
-            self.session = None
 
-    def respect_crawl_delay(self, domain):
-        current_time = time.time()
-        delay_needed = self.robots_cache.get_delay(domain)
-        time_since_last_crawl = current_time - self.last_crawl_time[domain]
-        
-        if time_since_last_crawl < delay_needed:
-            time.sleep(delay_needed - time_since_last_crawl)
-        
+    def respect_delay(self, domain):
+        now = time.time()
+        needed = self.robots.get_delay(domain)
+        waited = now - self.last_crawl_time[domain]
+        if waited < needed:
+            time.sleep(needed - waited)
         self.last_crawl_time[domain] = time.time()
 
     async def crawl_url(self, url, depth=0):
-        try:
-            domain = urlparse(url).netloc
-            
-            # Check depth limit
-            if depth >= self.config.get('max_depth', 3):
-                logging.info(f"Reached max depth {depth} for {url}")
-                return [], None
-
-            # Check domain restrictions
-            if not self.should_crawl_domain(domain):
-                logging.info(f"Domain {domain} not in allowed domains list")
-                return [], None
-            
-            # Check robots.txt
-            if not self.robots_cache.can_fetch(url):
-                logging.info(f"URL {url} disallowed by robots.txt")
-                return [], None
-            
-            # Respect crawl delay
-            self.respect_crawl_delay(domain)
-            
-            await self.init_session()
-            
-            async with self.session.get(url, timeout=30) as response:
-                if response.status != 200:
-                    logging.warning(f"Got status code {response.status} for {url}")
-                    return [], None
-                
-                content_type = response.headers.get('content-type', '').lower()
-                if 'text/html' not in content_type:
-                    logging.info(f"Skipping non-HTML content: {url}")
-                    return [], None
-                
-                html = await response.text()
-                
-                # Save HTML content
-                try:
-                    url_hash = hashlib.md5(url.encode()).hexdigest()
-                    os.makedirs('data/html', exist_ok=True)
-                    html_file = os.path.join('data', 'html', f'{url_hash}.html')
-                    with open(html_file, 'w', encoding='utf-8') as f:
-                        f.write(html)
-                except Exception as e:
-                    logging.error(f"Error saving HTML for {url}: {e}")
-                
-                soup = BeautifulSoup(html, 'lxml')
-                
-                # Extract links
-                links = []
-                for link in soup.find_all('a', href=True):
-                    href = link['href']
-                    absolute_url = urljoin(url, href)
-                    if absolute_url.startswith(('http://', 'https://')):
-                        links.append(absolute_url)
-                
-                # Extract content for indexing
-                # Remove script and style elements
-                for script in soup(["script", "style"]):
-                    script.decompose()
-                
-                text = soup.get_text(separator=' ', strip=True)
-                title = soup.title.string if soup.title else ''
-                
-                content = {
-                    'url': url,
-                    'title': title,
-                    'text': text,
-                    'timestamp': datetime.utcnow().isoformat(),
-                    'headers': dict(response.headers),
-                }
-                
-                return links, content
-                
-        except Exception as e:
-            logging.error(f"Error crawling {url}: {e}")
+        if depth >= self.config.get('max_depth', 3):
+            logging.info(f"Max depth reached for {url}")
             return [], None
 
-async def crawler_process():
-    """
-    Process for a crawler node.
-    Fetches web pages, extracts URLs, and sends results back to the master.
-    """
+        domain = urlparse(url).netloc
+        allowed_domains = self.config.get('allowed_domains')
+        if allowed_domains and allowed_domains[0] and domain not in allowed_domains:
+            logging.info(f"Domain {domain} not allowed")
+            return [], None
+
+        if self.config.get('respect_robots') and not self.robots.can_fetch(url):
+            logging.info(f"Blocked by robots.txt: {url}")
+            return [], None
+
+        self.respect_delay(domain)
+        await self.init_session()
+
+        try:
+            async with self.session.get(url, timeout=20) as resp:
+                if resp.status != 200:
+                    logging.warning(f"HTTP {resp.status} for {url}")
+                    return [], None
+                
+                ctype = resp.headers.get('content-type', '').lower()
+                if 'text/html' not in ctype:
+                    logging.info(f"Skipping non-HTML content: {url}")
+                    return [], None
+
+                html = await resp.text()
+                links = self.extract_links(url, html)
+                content = self.extract_content(url, html)
+                return links, content
+        except asyncio.TimeoutError:
+            logging.error(f"Timeout {url}")
+            return [], None
+        except RecursionError:
+            logging.error(f"Recursion error {url}")
+            return [], None
+        except Exception as e:
+            logging.error(f"Error fetching {url}: {e}")
+            return [], None
+
+    def extract_links(self, base_url, html):
+        try:
+            links = []
+            for match in re.finditer(r'href="(.*?)"', html):
+                href = match.group(1)
+                full_url = urljoin(base_url, href)
+                if full_url.startswith('http'):
+                    links.append(full_url)
+            return links
+        except Exception as e:
+            logging.error(f"Link extraction error: {e}")
+            return []
+
+    def extract_content(self, url, html):
+        try:
+            title = ''
+            title_match = re.search(r'<title>(.*?)</title>', html, re.IGNORECASE)
+            if title_match:
+                title = title_match.group(1)
+
+            clean_html = re.sub(r'<script.*?</script>|<style.*?</style>', '', html, flags=re.DOTALL)
+            text = re.sub(r'<[^>]+>', ' ', clean_html)
+            text = ' '.join(text.split())
+
+            url_hash = hashlib.md5(url.encode()).hexdigest()
+            os.makedirs('data/html', exist_ok=True)
+            with open(f'data/html/{url_hash}.html', 'w', encoding='utf-8') as f:
+                f.write(html)
+
+            return {
+                'url': url,
+                'title': title.strip(),
+                'text': text.strip(),
+                'timestamp': datetime.utcnow().isoformat()
+            }
+        except RecursionError:
+            logging.error(f"Recursion error parsing {url}")
+            return None
+        except Exception as e:
+            logging.error(f"Content extraction error {url}: {e}")
+            return None
+
+def cleanup_crawler():
+    try:
+        if os.path.exists('crawler.log'):
+            os.remove('crawler.log')
+        logging.info("Crawler cleanup completed")
+    except Exception as e:
+        logging.error(f"Error during cleanup: {e}")
+
+def crawler_process():
+    """Main process for crawler nodes"""
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
+
     logging.info(f"Crawler node started with rank {rank} of {size}")
-    
+
     crawler = WebCrawler(rank)
-    
-    try:
-        while True:
-            status = MPI.Status()
-            message = comm.recv(source=0, tag=0, status=status)  # Receive URL and depth from master
-            
-            if not message:  # Shutdown signal
-                logging.info(f"Crawler {rank} received shutdown signal. Exiting.")
+
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    while True:
+        if comm.Iprobe(source=0, tag=MPI.ANY_TAG):
+            message = comm.recv(source=0)
+
+            if isinstance(message, dict) and message.get('command') == 'shutdown':
+                logging.info("Received shutdown command from master")
+                loop.run_until_complete(crawler.close_session())
+                cleanup_crawler()
                 break
-            
-            if isinstance(message, dict):
+
+            if isinstance(message, dict) and 'url' in message:
                 url = message['url']
                 depth = message.get('depth', 0)
-            else:
-                url = message
-                depth = 0
-            
-            logging.info(f"Crawler {rank} received URL: {url} at depth {depth}")
-            
-            try:
-                extracted_urls, content = await crawler.crawl_url(url, depth)
-                
+                logging.info(f"Crawler {rank} crawling {url} at depth {depth}")
+
+                links, content = loop.run_until_complete(crawler.crawl_url(url, depth))
+
                 if content:
-                    # Send extracted URLs back to master with depth information
-                    url_messages = [{'url': u, 'depth': depth + 1} for u in extracted_urls]
-                    comm.send(url_messages, dest=0, tag=1)
-                    
-                    # Send content to indexer nodes
-                    crawler_nodes = size - 2
-                    indexer_rank = 1 + crawler_nodes + (rank % 1)
-                    comm.send(content, dest=indexer_rank, tag=2)
-                    
-                    # Send status update
-                    status_msg = {
-                        'url': url,
-                        'urls_found': len(extracted_urls),
-                        'success': True,
-                        'timestamp': datetime.utcnow().isoformat(),
-                        'depth': depth
-                    }
-                    comm.send(status_msg, dest=0, tag=99)
-                else:
-                    comm.send(f"Failed to crawl {url}", dest=0, tag=999)
-            
-            except Exception as e:
-                logging.error(f"Crawler {rank} error crawling {url}: {e}")
-                comm.send(f"Error crawling {url}: {e}", dest=0, tag=999)
-    
-    finally:
-        await crawler.close_session()
+                    comm.send({'url': url, 'content': content['text'], 'meta': content}, dest=size-1, tag=2)
+                    logging.info(f"Sent content for {url} to indexer")
+
+                if links:
+                    comm.send([{'url': link, 'depth': depth + 1} for link in links], dest=0, tag=1)
+                    logging.info(f"Sent {len(links)} new URLs from {url} to master")
+
+                comm.send({'url': url, 'status': 'completed'}, dest=0, tag=99)
+
+def start_crawler():
+    try:
+        crawler_process()
+    except KeyboardInterrupt:
+        logging.info("Keyboard interrupt, shutting down crawler...")
+        cleanup_crawler()
+    except Exception as e:
+        logging.error(f"Crawler crashed: {e}")
+        cleanup_crawler()
 
 if __name__ == '__main__':
-    asyncio.run(crawler_process())
+    start_crawler()

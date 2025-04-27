@@ -11,8 +11,6 @@ from queue import Queue, Empty
 import os
 import sys
 
-# Import necessary libraries for task queue, database, etc. (e.g., redis,
-# cloud storage SDKs)
 
 # Configure logging
 logging.basicConfig(
@@ -23,6 +21,9 @@ logging.basicConfig(
         logging.FileHandler('master.log')
     ]
 )
+
+# Initialize MPI communicator
+comm = MPI.COMM_WORLD
 
 class CrawlState:
     def __init__(self):
@@ -38,6 +39,17 @@ class CrawlState:
             'status': 'active'
         })
         self.config = None
+        self.available_workers = set()  # Set of available worker ranks
+        self.worker_tasks = {}  # worker_rank -> current_url
+        self.last_save_time = time.time()  # Initialize last save time
+        self.in_progress_lock = threading.Lock()  # Lock for in_progress dictionary
+
+    def should_crawl_domain(self, domain):
+        """Check if domain is allowed based on configuration"""
+        allowed_domains = self.config.get('allowed_domains')
+        if not allowed_domains or not allowed_domains[0]:  # If empty list or empty string
+            return True
+        return domain in allowed_domains
 
 class WorkerMonitor:
     def __init__(self, timeout=30):
@@ -85,29 +97,100 @@ def save_current_state(state):
     except Exception as e:
         logging.error(f"Error saving current state: {e}")
 
+def cleanup_state():
+    """Clean up all state and files"""
+    try:
+        # Delete state files
+        if os.path.exists('crawl_state.json'):
+            os.remove('crawl_state.json')
+        #if os.path.exists('master.log'):
+            #os.remove('master.log')
+        if os.path.exists('crawler.log'):
+            os.remove('crawler.log')
+        if os.path.exists('indexer.log'):
+            os.remove('indexer.log')
+        
+        # Clear all state
+        if 'state' in globals():
+            state.url_queue.clear()
+            state.in_progress.clear()
+            state.completed.clear()
+            state.failed.clear()
+            state.seen_urls.clear()
+            state.domain_counts.clear()
+            state.worker_stats.clear()
+            state.worker_tasks.clear()
+            state.available_workers.clear()
+        
+        logging.info("Cleaned up all state and files")
+    except Exception as e:
+        logging.error(f"Error during cleanup: {e}")
+
 def signal_handler(signum, frame):
     """Handle termination signals"""
     global state
-    logging.info(f"Received signal {signum}, initiating shutdown...")
-    save_current_state(state)
+    logging.info(f"Received signal {signum}, initiating cleanup and shutdown...")
+    cleanup_state()
     sys.exit(0)
 
 # Register signal handlers
 signal.signal(signal.SIGTERM, signal_handler)
 signal.signal(signal.SIGINT, signal_handler)
 
+def assign_url_to_crawler(url, crawler_rank):
+    with state.in_progress_lock:
+        state.in_progress[url] = (crawler_rank, time.time())
+    state.worker_tasks[crawler_rank] = url
+    state.available_workers.discard(crawler_rank)
+    comm.send({'url': url, 'depth': 0}, dest=crawler_rank, tag=0)
+    logging.info(f"URL {url} assigned to crawler {crawler_rank}, in_progress size: {len(state.in_progress)}")
+
+def check_worker_health():
+    """Check health of all workers and handle failures"""
+    current_time = time.time()
+    for rank in list(state.available_workers):
+        if rank not in state.worker_stats:
+            continue
+            
+        last_heartbeat = state.worker_stats[rank]['last_heartbeat']
+        if last_heartbeat and (current_time - last_heartbeat) > monitor.timeout:
+            logging.warning(f"Worker {rank} appears to have failed")
+            handle_crawler_failure(rank)
+
+def handle_crawler_failure(failed_rank):
+    """Handle a failed crawler node"""
+    if failed_rank in state.worker_tasks:
+        failed_url = state.worker_tasks[failed_rank]
+        if failed_url in state.in_progress:
+            del state.in_progress[failed_url]
+        state.failed.add(failed_url)
+        state.url_queue.append(failed_url)  # Requeue the URL
+        del state.worker_tasks[failed_rank]
+    
+    state.available_workers.discard(failed_rank)
+    state.worker_stats[failed_rank]['status'] = 'failed'
+
 def master_process():
     """
     Main process for the master node.
     Handles task distribution, worker management, and coordination.
     """
-    global state
-    comm = MPI.COMM_WORLD
+    global state, comm
     rank = comm.Get_rank()
     size = comm.Get_size()
     status = MPI.Status()
     
-    # Load configuration from web interface
+    # Initialize state
+    state = CrawlState()
+    monitor = WorkerMonitor()
+    
+    # Clear any existing state files
+    cleanup_state()
+    
+    # Initialize available workers (all ranks except master and indexer)
+    state.available_workers = set(range(1, size - 1))
+    
+    # Load configuration
     try:
         with open('config/crawl_config.json', 'r') as f:
             config = json.load(f)
@@ -128,7 +211,6 @@ def master_process():
         allowed_domains = None
 
     # Initialize crawl state with configuration
-    state = CrawlState()
     state.config = {
         'max_depth': max_depth,
         'max_pages_per_domain': max_pages_per_domain,
@@ -137,6 +219,18 @@ def master_process():
         'allowed_domains': allowed_domains
     }
     
+    # Clear all existing state
+    state.url_queue.clear()
+    state.in_progress.clear()
+    state.completed.clear()
+    state.failed.clear()
+    state.seen_urls.clear()
+    state.domain_counts.clear()
+    state.worker_stats.clear()
+    state.worker_tasks.clear()
+    logging.info("Cleared all existing crawl state")
+    
+    # Add seed URLs to queue
     for url in seed_urls:
         if url not in state.seen_urls:
             state.url_queue.append(url)
@@ -144,137 +238,90 @@ def master_process():
             domain = urlparse(url).netloc
             state.domain_counts[domain] += 1
 
-    monitor = WorkerMonitor()
-    
-    # Calculate worker distribution
-    crawler_nodes = size - 2  # Assuming master and at least one indexer
-    indexer_nodes = 1
-    
-    if crawler_nodes <= 0 or indexer_nodes <= 0:
-        logging.error("Not enough nodes. Need at least 3 nodes (1 master, 1 crawler, 1 indexer)")
-        return
+    # Main loop
+    while state.url_queue or state.in_progress:
+        # Check for messages from workers
+        if comm.Iprobe(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status):
+            source_rank = status.Get_source()
+            tag = status.Get_tag()
+            message = comm.recv(source=source_rank, tag=tag)
 
-    active_crawler_nodes = list(range(1, 1 + crawler_nodes))
-    active_indexer_nodes = list(range(1 + crawler_nodes, size))
-    
-    logging.info(f"Active Crawler Nodes: {active_crawler_nodes}")
-    logging.info(f"Active Indexer Nodes: {active_indexer_nodes}")
+            # Update worker heartbeat
+            if source_rank in state.available_workers:
+                monitor.update_heartbeat(source_rank)
+                state.worker_stats[source_rank]['last_heartbeat'] = time.time()
 
-    def handle_crawler_failure(failed_rank):
-        """Handle crawler node failure by reassigning its tasks"""
-        logging.warning(f"Handling failure of crawler {failed_rank}")
-        # Reassign in-progress URLs from failed crawler
-        for url, (worker_rank, _) in list(state.in_progress.items()):
-            if worker_rank == failed_rank:
-                state.url_queue.appendleft(url)  # Priority re-queue
-                del state.in_progress[url]
-                logging.info(f"Re-queued URL {url} from failed crawler {failed_rank}")
+            if tag == 1:  # New URLs discovered
+                new_urls = message
+                for url in new_urls:
+                    if isinstance(url, dict):
+                        url = url['url']  # Extract URL from dictionary if needed
+                    if url not in state.seen_urls:
+                        domain = urlparse(url).netloc
+                        if state.domain_counts[domain] < state.config['max_pages_per_domain']:
+                            state.url_queue.append(url)
+                            state.seen_urls.add(url)
+                            state.domain_counts[domain] += 1
 
-    def check_worker_health():
-        """Periodically check worker health"""
-        while True:
-            monitor.check_workers()
-            for rank in monitor.failed_workers - set(state.worker_stats.keys()):
-                handle_crawler_failure(rank)
-                state.worker_stats[rank]['status'] = 'failed'
-            time.sleep(5)  # Check every 5 seconds
-
-    # Start worker health monitoring thread
-    health_thread = threading.Thread(target=check_worker_health)
-    health_thread.daemon = True
-    health_thread.start()
-
-    def assign_url_to_crawler(url, crawler_rank):
-        """Assign a URL to a crawler node"""
-        state.in_progress[url] = (crawler_rank, datetime.now())
-        comm.send(url, dest=crawler_rank, tag=0)
-        logging.info(f"Assigned URL {url} to crawler {crawler_rank}")
-
-    # Start periodic status update thread
-    def update_status_periodically():
-        while True:
-            save_current_state(state)
-            time.sleep(2)  # Update every 2 seconds
-
-    status_thread = threading.Thread(target=update_status_periodically)
-    status_thread.daemon = True
-    status_thread.start()
-
-    try:
-        while state.url_queue or state.in_progress:
-            # Check for messages from workers
-            if comm.Iprobe(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status):
-                source_rank = status.Get_source()
-                tag = status.Get_tag()
-                message = comm.recv(source=source_rank, tag=tag)
-
-                # Update worker heartbeat
-                if source_rank in active_crawler_nodes:
-                    monitor.update_heartbeat(source_rank)
-
-                if tag == 1:  # New URLs discovered
-                    new_urls = message
-                    domain_limits = defaultdict(lambda: 1000)  # Limit pages per domain
-                    
-                    for url in new_urls:
-                        if url not in state.seen_urls:
-                            domain = urlparse(url).netloc
-                            if state.domain_counts[domain] < domain_limits[domain]:
-                                state.url_queue.append(url)
-                                state.seen_urls.add(url)
-                                state.domain_counts[domain] += 1
-
-                elif tag == 99:  # Status update
-                    if isinstance(message, dict):
-                        url = message.get('url')
+            elif tag == 99:  # Status update
+                if isinstance(message, dict):
+                    url = message.get('url')
+                    logging.info(f"Received status update for URL {url} from crawler {source_rank}")
+                    with state.in_progress_lock:
                         if url in state.in_progress:
                             del state.in_progress[url]
                             state.completed.add(url)
                             state.worker_stats[source_rank]['urls_processed'] += 1
+                            state.available_workers.add(source_rank)
+                            if source_rank in state.worker_tasks:
+                                del state.worker_tasks[source_rank]
+                            logging.info(f"URL {url} marked as completed, completed count: {len(state.completed)}")
+                        else:
+                            logging.warning(f"URL {url} not found in in_progress dictionary")
 
-                elif tag == 999:  # Error report
-                    if isinstance(message, str):
-                        logging.error(f"Error from worker {source_rank}: {message}")
-                        # Handle failed URL
-                        for url, (worker_rank, _) in list(state.in_progress.items()):
-                            if worker_rank == source_rank:
-                                state.failed.add(url)
-                                del state.in_progress[url]
+            elif tag == 999:  # Error message
+                logging.error(f"Error from worker {source_rank}: {message}")
+                if source_rank in state.worker_tasks:
+                    failed_url = state.worker_tasks[source_rank]
+                    state.failed.add(failed_url)
+                    if failed_url in state.in_progress:
+                        del state.in_progress[failed_url]
+                    state.available_workers.add(source_rank)
+                    del state.worker_tasks[source_rank]
 
-            # Assign new tasks to available crawlers
-            for crawler_rank in active_crawler_nodes:
-                if monitor.is_worker_alive(crawler_rank):
-                    while state.url_queue and sum(1 for _, (r, _) in state.in_progress.items() if r == crawler_rank) < 5:
-                        url = state.url_queue.popleft()
-                        if url not in state.in_progress and url not in state.completed:
-                            assign_url_to_crawler(url, crawler_rank)
+        # Assign URLs to available workers
+        while state.url_queue and state.available_workers:
+            url = state.url_queue.popleft()
+            worker_rank = min(state.available_workers)  # Simple round-robin assignment
+            assign_url_to_crawler(url, worker_rank)
 
-            # Periodic status logging
-            if time.time() % 60 < 1:  # Log every minute
-                logging.info(f"Status: Queue={len(state.url_queue)}, "
-                           f"In Progress={len(state.in_progress)}, "
-                           f"Completed={len(state.completed)}, "
-                           f"Failed={len(state.failed)}")
+        # Check worker health
+        check_worker_health()
 
-            time.sleep(0.1)  # Prevent busy waiting
-
-    except KeyboardInterrupt:
-        logging.info("Received keyboard interrupt, shutting down...")
-    except Exception as e:
-        logging.error(f"Error in master process: {e}")
-    finally:
-        # Ensure final state is saved
-        if 'state' in locals():
+        # Save state periodically
+        if time.time() - state.last_save_time > 60:  # Save every minute
             save_current_state(state)
+            state.last_save_time = time.time()
+
+        time.sleep(0.1)  # Prevent CPU spinning
+
+    # Send shutdown signal to all workers
+    for rank in range(1, size - 1):
+        comm.send({'command': 'shutdown'}, dest=rank, tag=0)
+    
+    # Clean up before exiting
+    cleanup_state()
 
 if __name__ == '__main__':
     try:
         master_process()
     except KeyboardInterrupt:
         logging.info("Received keyboard interrupt, shutting down...")
+        cleanup_state()
     except Exception as e:
         logging.error(f"Error in master process: {e}")
+        cleanup_state()
     finally:
         # Ensure final state is saved
         if 'state' in locals():
-            save_current_state(state)
+            cleanup_state()

@@ -1,13 +1,13 @@
 {
   "seed_urls": [
-    "https://lms.eng.asu.edu.eg/my/"
+    "https://demo.testfire.net/"
   ],
   "max_depth": 3,
-  "max_pages_per_domain": 1000,
+  "max_pages_per_domain": 2,
   "respect_robots": false,
   "crawl_delay": 1.0,
   "allowed_domains": [
     ""
   ],
-  "start_time": "2025-04-14T21:51:20.554064"
+  "start_time": "2025-04-27T20:26:02.905735"
 }
