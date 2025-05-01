@@ -13,7 +13,7 @@ logging.basicConfig(
     format='%(asctime)s - Indexer - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler('indexer.log', mode='w')  # clear previous logs
+        logging.FileHandler('indexer.log', mode='w')
     ]
 )
 
@@ -23,8 +23,8 @@ size = comm.Get_size()
 
 class SearchIndex:
     def __init__(self):
-        self.content_index = defaultdict(list)  # word -> [(url, score, title, timestamp), ...]
-        self.url_index = {}  # url -> {title, text, timestamp}
+        self.content_index = defaultdict(list)
+        self.url_index = {}
         
     def tokenize(self, text):
         if not text:
@@ -125,20 +125,12 @@ def check_search_requests():
         logging.error(f"Error checking search requests: {e}")
 
 def cleanup_indexer():
+    """Clean up indexer resources"""
     try:
         # Close logging handlers
         for handler in logging.getLogger().handlers[:]:
             handler.close()
             logging.getLogger().removeHandler(handler)
-        logging.shutdown()
-        
-        if os.path.exists('indexer.log'):
-            try:
-                os.remove('indexer.log')
-                logging.info("Deleted indexer.log")
-            except Exception as e:
-                logging.error(f"Could not delete indexer.log: {e}")
-        
         logging.info("Indexer cleanup completed")
     except Exception as e:
         logging.error(f"Error during indexer cleanup: {e}")

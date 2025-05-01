@@ -7,11 +7,17 @@ from mpi4py import MPI
 import logging
 import time
 from urllib.parse import urlparse
+import re
 
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - CLI - %(levelname)s - %(message)s'
 )
+
+def validate_domain(domain):
+    """Validate that the input is a valid domain (e.g., example.com, not a path or URL)"""
+    domain_regex = r'^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$'
+    return bool(re.match(domain_regex, domain))
 
 def validate_url(url):
     """Validate URL format"""
@@ -52,8 +58,19 @@ def start_crawl(args):
         seed_urls.extend(file_urls)
 
     if not seed_urls:
-        logging.error("No valid seed URLs provided")
+        logging.error("No valid seed URLs provided. Please provide at least one valid URL.")
         return
+
+    # Validate allowed domains
+    allowed_domains = []
+    if args.allowed_domains:
+        for domain in args.allowed_domains.split(','):
+            domain = domain.strip()
+            if validate_domain(domain):
+                allowed_domains.append(domain)
+            else:
+                logging.error(f"Invalid domain format: {domain}. Must be a valid domain (e.g., example.com).")
+                return
 
     # Save configuration
     config = {
@@ -62,7 +79,7 @@ def start_crawl(args):
         'max_pages_per_domain': args.limit,
         'respect_robots': not args.ignore_robots,
         'crawl_delay': args.delay,
-        'allowed_domains': args.allowed_domains.split(',') if args.allowed_domains else None,
+        'allowed_domains': allowed_domains or None,
         'start_time': time.strftime('%Y-%m-%d %H:%M:%S')
     }
 
@@ -72,7 +89,7 @@ def start_crawl(args):
 
     # Start the crawl using mpiexec
     num_nodes = args.nodes if args.nodes else 3  # Default to 3 nodes (1 master, 1 crawler, 1 indexer)
-    cmd = f"mpiexec -n {num_nodes} python src/master.py"
+    cmd = f"mpiexec -n {num_nodes} python src/run_crawler.py"
     logging.info(f"Starting crawl with command: {cmd}")
     os.system(cmd)
 
@@ -140,7 +157,7 @@ def main():
     start_parser.add_argument('--limit', type=int, default=1000, help='Maximum pages per domain')
     start_parser.add_argument('--delay', type=float, default=1.0, help='Default crawl delay in seconds')
     start_parser.add_argument('--nodes', type=int, help='Number of nodes to use')
-    start_parser.add_argument('--allowed-domains', help='Comma-separated list of allowed domains')
+    start_parser.add_argument('--allowed-domains', help='Comma-separated list of allowed domains (e.g., example.com)')
     start_parser.add_argument('--ignore-robots', action='store_true', help='Ignore robots.txt')
 
     # Status command
@@ -165,4 +182,4 @@ def main():
         parser.print_help()
 
 if __name__ == '__main__':
-    main() 
+    main()
