@@ -1,13 +1,13 @@
 {
   "seed_urls": [
-    "https://www.reddit.com/dev/api"
+    "https://www.theguardian.com"
   ],
   "max_depth": 3,
-  "max_pages_per_domain": 3,
+  "max_pages_per_domain": 20,
   "respect_robots": true,
   "crawl_delay": 1.0,
   "allowed_domains": [
-    "www.reddit.com"
+    "www.theguardian.com"
   ],
-  "start_time": "2025-05-01T23:39:07.081742"
+  "start_time": "2025-05-02T01:55:40.276598"
 }

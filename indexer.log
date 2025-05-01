@@ -1,3 +1,21 @@
-2025-05-02 00:30:29,573 - Indexer (Rank 3) - INFO - Indexer node started with rank 3
-2025-05-02 00:30:36,486 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.reddit.com/dev/api
-2025-05-02 00:30:37,346 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.reddit.com/dev/api/
+2025-05-02 01:59:03,146 - Indexer (Rank 3) - INFO - Indexer node started with rank 3
+2025-05-02 01:59:11,645 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com
+2025-05-02 01:59:12,558 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com#maincontent
+2025-05-02 01:59:12,662 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com#navigation
+2025-05-02 01:59:13,170 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/preference/edition/int
+2025-05-02 01:59:13,480 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/preference/edition/uk
+2025-05-02 01:59:14,302 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/preference/edition/us
+2025-05-02 01:59:14,511 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/preference/edition/au
+2025-05-02 01:59:15,320 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/preference/edition/eur
+2025-05-02 01:59:18,655 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/commentisfree
+2025-05-02 01:59:19,161 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/sport
+2025-05-02 01:59:20,185 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/culture
+2025-05-02 01:59:21,200 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/lifeandstyle
+2025-05-02 01:59:23,334 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/world
+2025-05-02 01:59:24,345 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/
+2025-05-02 01:59:24,452 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/us-news/us-politics
+2025-05-02 01:59:24,859 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/uk-news
+2025-05-02 01:59:25,369 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/environment/climate-crisis
+2025-05-02 01:59:25,776 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/world/middleeast
+2025-05-02 01:59:26,284 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/world/ukraine
+2025-05-02 01:59:26,908 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.theguardian.com/environment

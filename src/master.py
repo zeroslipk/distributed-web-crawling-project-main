@@ -161,7 +161,7 @@ def assign_url_to_crawler(url, crawler_rank):
     comm.send({'url': url, 'depth': 0}, dest=crawler_rank, tag=0)
     logging.info(f"URL {url} assigned to crawler {crawler_rank}, in_progress size: {len(state.in_progress)}")
 
-def check_worker_health():
+def check_worker_health(monitor):
     current_time = time.time()
     for rank in list(state.available_workers):
         if rank not in state.worker_stats:
@@ -361,7 +361,7 @@ def master_process():
                 state.seen_urls.add(url)
                 logging.info(f"Removed URL {url} from queue (domain {domain} limit reached or not allowed)")
 
-        check_worker_health()
+        check_worker_health(monitor)
 
         if time.time() - state.last_save_time > 60:
             save_current_state(state)

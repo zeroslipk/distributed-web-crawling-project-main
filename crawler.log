@@ -1,8 +1,39 @@
-2025-05-02 00:30:30,064 - Crawler (Rank 2) - INFO - Crawler node started with rank 2 of 4
-2025-05-02 00:30:36,705 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.reddit.com/static/opensearch.xml at depth 0
-2025-05-02 00:30:36,888 - Crawler (Rank 2) - INFO - Skipping non-HTML content: https://www.reddit.com/static/opensearch.xml
-rawler (Rank 1) - INFO - Sent 1137 new URLs from https://www.reddit.com/dev/api to master
-2025-05-02 00:30:36,814 - Crawler (Rank 1) - INFO - Crawler 1 crawling https://www.reddit.com/dev/api/ at depth 0
-2025-05-02 00:30:37,320 - Crawler (Rank 1) - INFO - Sent content for https://www.reddit.com/dev/api/ to indexer
-2025-05-02 00:30:37,396 - Crawler (Rank 1) - INFO - Sent 1137 new URLs from https://www.reddit.com/dev/api/ to master
-2025-05-02 00:30:37,396 - Crawler (Rank 1) - INFO - Received shutdown command from master
+2025-05-02 01:59:04,067 - Crawler (Rank 1) - INFO - Crawler node started with rank 1 of 4
+2025-05-02 01:59:11,863 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com#maincontent at depth 0
+2025-05-02 01:59:12,556 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com#maincontent to indexer
+2025-05-02 01:59:12,680 - Crawler (Rank 2) - INFO - Sent 331 new URLs from https://www.theguardian.com#maincontent to master
+2025-05-02 01:59:12,785 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/preference/edition/int at depth 0
+2025-05-02 01:59:13,167 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/preference/edition/int to indexer
+2025-05-02 01:59:13,197 - Crawler (Rank 2) - INFO - Sent 331 new URLs from https://www.theguardian.com/preference/edition/int to master
+2025-05-02 01:59:13,303 - Crawler (Rank 2) - INFO - Crawler 22025-05-02 01:59:13,472 - Crawler (Rank 1) - INFO - Sent content for htt2025-05-02 01:59:14,290 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/preference/edition/us to indexer
+2025-05-02 01:59:14,299 - Crawler (Rank 2) - INFO - Sent 354 new URLs from https://www.theguardian.com/preference/edition/us to master
+2025-05-02 01:59:14,438 - Crawler (Rank 2) - INFO - Crawler 22025-05-02 01:59:14,506 - Crawler (Rank 1) - INFO - Sent content for http2025-05-02 01:59:15,318 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/preference/edition/eur to indexer
+2025-05-02 01:59:15,323 - Crawler (Rank 2) - INFO - Sent 333 new URLs from https://www.theguardian.com/preference/edition/eur to master
+2025-05-02 01:59:15,434 - Crawler (Ra2025-05-02 01:59:24,343 - Crawler (Rank 1) - INFO - Sent content for https://www.theguardian.com/ to indexer
+2025-05-02 01:59:24,365 - Crawler (Rank 1) - INFO - Sent 370 new URLs from https://www.theguardian.com/ to master
+2025-05-02 01:59:24,695 - Crawler (Rank 1) - INFO - Crawler 1 crawling https://www.theguardian.com/environment/climate-crisis at depth 0
+2025-05-02 01:59:25,364 - Crawler (Rank 1) - INFO - Sent content for https://www.theguardian.com/environment/climate-crisis to indexer
+2025-05-02 01:59:25,466 - Crawler (Rank 1) - INFO - Sent 222 new URLs from https://www.theguardian.com/environment/climate-crisis to master
+2025-05-02 01:59:25,596 - Crawler (Rank 1) - INFO - Crawler 1 crawling https://www.theguardian.com/world/ukraine at depth 0
+2025-05-02 01:59:26,283 - Crawler (Rank 1) - INFO - Sent content for https://www.theguardian.com/world/ukraine to indexer
+2025-05-02 01:59:26,300 - Crawler (Rank 1) - INFO - Sent 195 new URLs from https://www.theguardian.com/world/ukraine to master
+eguardian.com/culture to master
+2025-05-02 01:59:20,402 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/lifeandstyle at depth 0
+2025-05-02 01:59:21,195 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/lifeandstyle to indexer
+2025-05-02 01:59:21,264 - Crawler (Rank 2) - INFO - Sent 311 new URLs from https://www.theguardian.com/lifeandstyle to master
+2025-05-02 01:59:21,385 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/world at depth 0
+2025-05-02 01:59:23,325 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/world to indexer
+2025-05-02 01:59:23,367 - Crawler (Rank 2) - INFO - Sent 257 new URLs from https://www.theguardian.com/world to master
+2025-05-02 01:59:23,492 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/us-news/us-politics at depth 0
+2025-05-02 01:59:24,446 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/us-news/us-politics to indexer
+2025-05-02 01:59:24,478 - Crawler (Rank 2) - INFO - Sent 213 new URLs from https://www.theguardian.com/us-news/us-politics to master
+2025-05-02 01:59:24,588 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/uk-news at depth 0
+2025-05-02 01:59:24,857 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/uk-news to indexer
+2025-05-02 01:59:24,911 - Crawler (Rank 2) - INFO - Sent 241 new URLs from https://www.theguardian.com/uk-news to master
+2025-05-02 01:59:25,028 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/world/middleeast at depth 0
+2025-05-02 01:59:25,774 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/world/middleeast to indexer
+2025-05-02 01:59:25,827 - Crawler (Rank 2) - INFO - Sent 191 new URLs from https://www.theguardian.com/world/middleeast to master
+2025-05-02 01:59:25,955 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.theguardian.com/environment at depth 0
+2025-05-02 01:59:26,894 - Crawler (Rank 2) - INFO - Sent content for https://www.theguardian.com/environment to indexer
+2025-05-02 01:59:26,989 - Crawler (Rank 2) - INFO - Sent 216 new URLs from https://www.theguardian.com/environment to master
+2025-05-02 01:59:26,989 - Crawler (Rank 2) - INFO - Received shutdown command from master
