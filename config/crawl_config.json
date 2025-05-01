@@ -7,7 +7,7 @@
   "respect_robots": true,
   "crawl_delay": 1.0,
   "allowed_domains": [
-    "reddit.com/dev/api"
+    "www.reddit.com"
   ],
   "start_time": "2025-05-01T23:39:07.081742"
 }

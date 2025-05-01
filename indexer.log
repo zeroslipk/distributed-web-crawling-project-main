@@ -1,1 +1,3 @@
-2025-05-01 23:49:31,334 - Indexer - INFO - Indexer node started with rank 3
+2025-05-02 00:30:29,573 - Indexer (Rank 3) - INFO - Indexer node started with rank 3
+2025-05-02 00:30:36,486 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.reddit.com/dev/api
+2025-05-02 00:30:37,346 - Indexer (Rank 3) - INFO - Indexed content from URL: https://www.reddit.com/dev/api/

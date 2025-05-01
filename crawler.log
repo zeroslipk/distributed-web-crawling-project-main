@@ -1,0 +1,8 @@
+2025-05-02 00:30:30,064 - Crawler (Rank 2) - INFO - Crawler node started with rank 2 of 4
+2025-05-02 00:30:36,705 - Crawler (Rank 2) - INFO - Crawler 2 crawling https://www.reddit.com/static/opensearch.xml at depth 0
+2025-05-02 00:30:36,888 - Crawler (Rank 2) - INFO - Skipping non-HTML content: https://www.reddit.com/static/opensearch.xml
+rawler (Rank 1) - INFO - Sent 1137 new URLs from https://www.reddit.com/dev/api to master
+2025-05-02 00:30:36,814 - Crawler (Rank 1) - INFO - Crawler 1 crawling https://www.reddit.com/dev/api/ at depth 0
+2025-05-02 00:30:37,320 - Crawler (Rank 1) - INFO - Sent content for https://www.reddit.com/dev/api/ to indexer
+2025-05-02 00:30:37,396 - Crawler (Rank 1) - INFO - Sent 1137 new URLs from https://www.reddit.com/dev/api/ to master
+2025-05-02 00:30:37,396 - Crawler (Rank 1) - INFO - Received shutdown command from master

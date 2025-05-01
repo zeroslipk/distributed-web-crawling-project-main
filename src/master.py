@@ -26,25 +26,24 @@ comm = MPI.COMM_WORLD
 
 class CrawlState:
     def __init__(self):
-        self.url_queue = deque()  # URLs to crawl
-        self.in_progress = {}  # URL -> (worker_rank, start_time)
-        self.completed = set()  # Successfully crawled URLs
-        self.failed = set()  # Failed URLs
-        self.seen_urls = set()  # All URLs seen (to prevent duplicates)
-        self.domain_counts = defaultdict(int)  # Domain -> count of pages crawled
+        self.url_queue = deque()
+        self.in_progress = {}
+        self.completed = set()
+        self.failed = set()
+        self.seen_urls = set()
+        self.domain_counts = defaultdict(int)
         self.worker_stats = defaultdict(lambda: {
             'urls_processed': 0,
             'last_heartbeat': None,
             'status': 'active'
         })
         self.config = None
-        self.available_workers = set()  # Set of available worker ranks
-        self.worker_tasks = {}  # worker_rank -> current_url
-        self.last_save_time = time.time()  # Initialize last save time
-        self.in_progress_lock = threading.Lock()  # Lock for in_progress dictionary
+        self.available_workers = set()
+        self.worker_tasks = {}
+        self.last_save_time = time.time()
+        self.in_progress_lock = threading.Lock()
 
     def should_crawl_domain(self, domain):
-        """Check if domain is allowed based on configuration"""
         allowed_domains = self.config.get('allowed_domains')
         if not allowed_domains or not any(allowed_domains):
             return True
@@ -56,13 +55,12 @@ class CrawlState:
         )
 
     def can_crawl_domain(self, domain):
-        """Check if domain has not reached max_pages_per_domain"""
         return self.domain_counts[domain] < self.config['max_pages_per_domain']
 
 class WorkerMonitor:
     def __init__(self, timeout=30):
         self.timeout = timeout
-        self.workers = {}  # rank -> last_heartbeat_time
+        self.workers = {}
         self.failed_workers = set()
         self.lock = threading.Lock()
 
@@ -87,7 +85,6 @@ class WorkerMonitor:
             return rank in self.workers and self.workers[rank]['status'] == 'active'
 
 def save_current_state(state):
-    """Save current crawl state to file"""
     state_file = 'crawl_state.json'
     try:
         current_state = {
@@ -106,15 +103,12 @@ def save_current_state(state):
         logging.error(f"Error saving current state: {e}")
 
 def cleanup_state():
-    """Clean up all state and files"""
     try:
-        # Close logging handlers
         for handler in logging.getLogger().handlers[:]:
             handler.close()
             logging.getLogger().removeHandler(handler)
         logging.shutdown()
         
-        # Delete state files
         if os.path.exists('crawl_state.json'):
             os.remove('crawl_state.json')
         for log_file in ['master.log']:
@@ -125,7 +119,6 @@ def cleanup_state():
                 except Exception as e:
                     logging.error(f"Could not delete {log_file}: {e}")
         
-        # Clear all state
         if 'state' in globals():
             state.url_queue.clear()
             state.in_progress.clear()
@@ -142,15 +135,18 @@ def cleanup_state():
         logging.error(f"Error during cleanup: {e}")
 
 def signal_handler(signum, frame):
-    """Handle termination signals"""
     global state
     logging.info(f"Received signal {signum}, initiating cleanup and shutdown...")
-    # Send shutdown to workers
-    for rank in range(1, comm.Get_size()):
+    size = comm.Get_size()
+    for rank in range(1, size):
         try:
-            comm.send({'command': 'shutdown'}, dest=rank, tag=0)
-        except:
-            pass
+            status = MPI.Status()
+            if comm.Iprobe(source=rank, tag=MPI.ANY_TAG, status=status):
+                comm.send({'command': 'shutdown'}, dest=rank, tag=0)
+            else:
+                logging.warning(f"Worker {rank} appears unresponsive, skipping shutdown signal")
+        except Exception as e:
+            logging.warning(f"Failed to send shutdown to worker {rank}: {e}")
     cleanup_state()
     sys.exit(0)
 
@@ -166,7 +162,6 @@ def assign_url_to_crawler(url, crawler_rank):
     logging.info(f"URL {url} assigned to crawler {crawler_rank}, in_progress size: {len(state.in_progress)}")
 
 def check_worker_health():
-    """Check health of all workers and handle failures"""
     current_time = time.time()
     for rank in list(state.available_workers):
         if rank not in state.worker_stats:
@@ -177,21 +172,18 @@ def check_worker_health():
             handle_crawler_failure(rank)
 
 def handle_crawler_failure(failed_rank):
-    """Handle a failed crawler node"""
     if failed_rank in state.worker_tasks:
         failed_url = state.worker_tasks[failed_rank]
         if failed_url in state.in_progress:
             del state.in_progress[failed_url]
         state.failed.add(failed_url)
-        state.url_queue.append(failed_url)  # Requeue the URL
+        state.url_queue.append(failed_url)
         del state.worker_tasks[failed_rank]
     
     state.available_workers.discard(failed_rank)
     state.worker_stats[failed_rank]['status'] = 'failed'
 
 def prune_queue_and_in_progress(state):
-    """Remove URLs from queue and in_progress if domain limit is reached"""
-    # Prune url_queue
     pruned_queue = deque()
     while state.url_queue:
         url = state.url_queue.popleft()
@@ -203,7 +195,6 @@ def prune_queue_and_in_progress(state):
             logging.info(f"Pruned URL {url} from queue (domain {domain} limit reached or not allowed)")
     state.url_queue = pruned_queue
 
-    # Prune in_progress
     with state.in_progress_lock:
         for url in list(state.in_progress.keys()):
             domain = urlparse(url).netloc
@@ -217,23 +208,16 @@ def prune_queue_and_in_progress(state):
                 logging.info(f"Pruned URL {url} from in_progress (domain {domain} limit reached or not allowed)")
 
 def master_process():
-    """
-    Main process for the master node.
-    Handles task distribution, worker management, and coordination.
-    """
     global state, comm
     rank = comm.Get_rank()
     size = comm.Get_size()
     status = MPI.Status()
     
-    # Initialize state
     state = CrawlState()
     monitor = WorkerMonitor()
     
-    # Initialize available workers (all ranks except master and indexer)
     state.available_workers = set(range(1, size - 1))
     
-    # Load configuration
     try:
         config_path = os.path.abspath('config/crawl_config.json')
         logging.info(f"Attempting to load configuration from {config_path}")
@@ -258,7 +242,6 @@ def master_process():
         crawl_delay = 1.0
         allowed_domains = None
 
-    # Initialize crawl state with configuration
     state.config = {
         'max_depth': max_depth,
         'max_pages_per_domain': max_pages_per_domain,
@@ -267,7 +250,6 @@ def master_process():
         'allowed_domains': allowed_domains
     }
     
-    # Clear all existing state
     state.url_queue.clear()
     state.in_progress.clear()
     state.completed.clear()
@@ -278,7 +260,6 @@ def master_process():
     state.worker_tasks.clear()
     logging.info("Cleared all existing crawl state")
     
-    # Add seed URLs to queue, respecting max_pages_per_domain
     valid_urls = 0
     for url in seed_urls:
         if url not in state.seen_urls:
@@ -297,38 +278,35 @@ def master_process():
         else:
             logging.info(f"Skipped seed URL {url} (already seen)")
 
-    # Check if there are any valid URLs to crawl
     if not state.url_queue and not state.in_progress:
         logging.error("No valid seed URLs available to crawl. Check allowed_domains and seed URLs in config.")
-        # Send shutdown to workers
         for rank in range(1, size):
             try:
-                comm.send({'command': 'shutdown'}, dest=rank, tag=0)
-            except:
-                pass
+                status = MPI.Status()
+                if comm.Iprobe(source=rank, tag=MPI.ANY_TAG, status=status):
+                    comm.send({'command': 'shutdown'}, dest=rank, tag=0)
+                else:
+                    logging.warning(f"Worker {rank} appears unresponsive, skipping shutdown signal")
+            except Exception as e:
+                logging.warning(f"Failed to send shutdown to worker {rank}: {e}")
         cleanup_state()
         sys.exit(1)
 
-    # Main loop
     while state.url_queue or state.in_progress:
-        # Prune queue and in_progress to respect domain limits
         prune_queue_and_in_progress(state)
 
-        # Log current state
         logging.info(f"Queue size: {len(state.url_queue)}, In progress: {len(state.in_progress)}, Completed: {len(state.completed)}, Failed: {len(state.failed)}")
 
-        # Check for messages from workers
         if comm.Iprobe(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status):
             source_rank = status.Get_source()
             tag = status.Get_tag()
             message = comm.recv(source=source_rank, tag=tag)
 
-            # Update worker heartbeat
             if source_rank in state.available_workers:
                 monitor.update_heartbeat(source_rank)
                 state.worker_stats[source_rank]['last_heartbeat'] = time.time()
 
-            if tag == 1:  # New URLs discovered
+            if tag == 1:
                 new_urls = message
                 for url_dict in new_urls:
                     url = url_dict['url']
@@ -343,7 +321,7 @@ def master_process():
                             state.seen_urls.add(url)
                             logging.info(f"Skipped URL {url} (domain {domain} limit reached or not allowed)")
 
-            elif tag == 99:  # Status update
+            elif tag == 99:
                 if isinstance(message, dict):
                     url = message.get('url')
                     logging.info(f"Received status update for URL {url} from crawler {source_rank}")
@@ -361,7 +339,7 @@ def master_process():
                         else:
                             logging.warning(f"URL {url} not found in in_progress dictionary")
 
-            elif tag == 999:  # Error message
+            elif tag == 999:
                 logging.error(f"Error from worker {source_rank}: {message}")
                 if source_rank in state.worker_tasks:
                     failed_url = state.worker_tasks[source_rank]
@@ -371,7 +349,6 @@ def master_process():
                     state.available_workers.add(source_rank)
                     del state.worker_tasks[source_rank]
 
-        # Assign URLs to available workers
         while state.url_queue and state.available_workers:
             url = state.url_queue[0]
             domain = urlparse(url).netloc
@@ -384,24 +361,24 @@ def master_process():
                 state.seen_urls.add(url)
                 logging.info(f"Removed URL {url} from queue (domain {domain} limit reached or not allowed)")
 
-        # Check worker health
         check_worker_health()
 
-        # Save state periodically
         if time.time() - state.last_save_time > 60:
             save_current_state(state)
             state.last_save_time = time.time()
 
         time.sleep(0.1)
 
-    # Send shutdown signal to all workers
     for rank in range(1, size):
         try:
-            comm.send({'command': 'shutdown'}, dest=rank, tag=0)
-        except:
-            pass
+            status = MPI.Status()
+            if comm.Iprobe(source=rank, tag=MPI.ANY_TAG, status=status):
+                comm.send({'command': 'shutdown'}, dest=rank, tag=0)
+            else:
+                logging.warning(f"Worker {rank} appears unresponsive, skipping shutdown signal")
+        except Exception as e:
+            logging.warning(f"Failed to send shutdown to worker {rank}: {e}")
     
-    # Clean up before exiting
     cleanup_state()
 
 if __name__ == '__main__':
