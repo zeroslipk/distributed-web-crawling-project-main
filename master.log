@@ -1,92 +1,1725 @@
-2025-04-27 22:00:17,453 - Master - ERROR - Could not delete crawler.log: [WinError 32] The process cannot access the file because it is being used by another process: 'crawler.log'
-2025-04-27 22:00:17,454 - Master - ERROR - Could not delete indexer.log: [WinError 32] The process cannot access the file because it is being used by another process: 'indexer.log'
-2025-04-27 22:00:17,454 - Master - INFO - Cleaned up all state and files
-2025-04-27 22:00:17,455 - Master - INFO - Loaded configuration: {'seed_urls': ['https://demo.testfire.net/'], 'max_depth': 3, 'max_pages_per_domain': 5, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': ['demo.testfire.net'], 'start_time': '2025-04-27T21:58:18.721624'}
-2025-04-27 22:00:17,455 - Master - INFO - Cleared all existing crawl state
-2025-04-27 22:00:17,457 - Master - INFO - Added seed URL https://demo.testfire.net/ for domain demo.testfire.net
-2025-04-27 22:00:17,457 - Master - INFO - URL https://demo.testfire.net/ assigned to crawler 1, in_progress size: 1
-2025-04-27 22:00:19,164 - Master - INFO - Queued new URL https://demo.testfire.net/style.css for domain demo.testfire.net
-2025-04-27 22:00:19,164 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,164 - Master - INFO - Queued new URL https://demo.testfire.net/login.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,164 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside_contact.htm for domain demo.testfire.net
-2025-04-27 22:00:19,165 - Master - INFO - Queued new URL https://demo.testfire.net/feedback.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,165 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal.htm for domain demo.testfire.net
-2025-04-27 22:00:19,165 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business.htm for domain demo.testfire.net
-2025-04-27 22:00:19,165 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_deposit.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_checking.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_loans.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_cards.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_investments.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_other.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_deposit.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_lending.htm for domain demo.testfire.net
-2025-04-27 22:00:19,166 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_cards.htm for domain demo.testfire.net
-2025-04-27 22:00:19,167 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_insurance.htm for domain demo.testfire.net
-2025-04-27 22:00:19,167 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_retirement.htm for domain demo.testfire.net
-2025-04-27 22:00:19,167 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=business_other.htm for domain demo.testfire.net
-2025-04-27 22:00:19,167 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside_about.htm for domain demo.testfire.net
-2025-04-27 22:00:19,168 - Master - INFO - Queued new URL https://demo.testfire.net/cgi.exe for domain demo.testfire.net
-2025-04-27 22:00:19,168 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside_investor.htm for domain demo.testfire.net
-2025-04-27 22:00:19,168 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside_press.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=inside_careers.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/subscribe.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=personal_savings.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=privacy.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/default.jsp?content=security.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/survey_questions.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/index.jsp?content=security.htm for domain demo.testfire.net
-2025-04-27 22:00:19,169 - Master - INFO - Queued new URL https://demo.testfire.net/status_check.jsp for domain demo.testfire.net
-2025-04-27 22:00:19,170 - Master - INFO - Queued new URL https://demo.testfire.net/swagger/index.html for domain demo.testfire.net
-2025-04-27 22:00:19,170 - Master - INFO - Skipped URL https://github.com/AppSecDev/AltoroJ/ (domain github.com limit reached or not allowed)
-2025-04-27 22:00:19,170 - Master - INFO - Skipped URL https://www.hcl-software.com/appscan/ (domain www.hcl-software.com limit reached or not allowed)
-2025-04-27 22:00:19,171 - Master - INFO - URL https://demo.testfire.net/style.css assigned to crawler 2, in_progress size: 2
-2025-04-27 22:00:19,273 - Master - INFO - Received status update for URL https://demo.testfire.net/ from crawler 1
-2025-04-27 22:00:19,274 - Master - INFO - URL https://demo.testfire.net/ marked as completed, completed count: 1, domain demo.testfire.net count: 2
-2025-04-27 22:00:19,274 - Master - INFO - URL https://demo.testfire.net/index.jsp assigned to crawler 1, in_progress size: 2
-2025-04-27 22:00:19,577 - Master - INFO - Received status update for URL https://demo.testfire.net/index.jsp from crawler 1
-2025-04-27 22:00:19,577 - Master - INFO - URL https://demo.testfire.net/index.jsp marked as completed, completed count: 2, domain demo.testfire.net count: 3
-2025-04-27 22:00:19,577 - Master - INFO - URL https://demo.testfire.net/login.jsp assigned to crawler 1, in_progress size: 2
-2025-04-27 22:00:20,087 - Master - INFO - Received status update for URL https://demo.testfire.net/style.css from crawler 2
-2025-04-27 22:00:20,087 - Master - INFO - URL https://demo.testfire.net/style.css marked as completed, completed count: 3, domain demo.testfire.net count: 4
-2025-04-27 22:00:20,087 - Master - INFO - URL https://demo.testfire.net/index.jsp?content=inside_contact.htm assigned to crawler 2, in_progress size: 2
-2025-04-27 22:00:20,492 - Master - INFO - Queued new URL https://demo.testfire.net/disclaimer.htm?url=http://www.netscape.com for domain demo.testfire.net
-2025-04-27 22:00:20,499 - Master - INFO - Queued new URL https://demo.testfire.net/disclaimer.htm?url=http://www.microsoft.com for domain demo.testfire.net
-2025-04-27 22:00:20,603 - Master - INFO - Received status update for URL https://demo.testfire.net/index.jsp?content=inside_contact.htm from crawler 2
-2025-04-27 22:00:20,606 - Master - INFO - URL https://demo.testfire.net/index.jsp?content=inside_contact.htm marked as completed, completed count: 4, domain demo.testfire.net count: 5
-2025-04-27 22:00:20,606 - Master - INFO - Removed URL https://demo.testfire.net/feedback.jsp from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,606 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=inside.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_deposit.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_checking.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_loans.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_cards.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_investments.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_other.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,607 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_deposit.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_lending.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_cards.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_insurance.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_retirement.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=business_other.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=inside_about.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/cgi.exe from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=inside_investor.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=inside_press.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,608 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=inside_careers.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,609 - Master - INFO - Removed URL https://demo.testfire.net/subscribe.jsp from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,609 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=personal_savings.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,609 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=privacy.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,609 - Master - INFO - Removed URL https://demo.testfire.net/default.jsp?content=security.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,609 - Master - INFO - Removed URL https://demo.testfire.net/survey_questions.jsp from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,610 - Master - INFO - Removed URL https://demo.testfire.net/index.jsp?content=security.htm from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,610 - Master - INFO - Removed URL https://demo.testfire.net/status_check.jsp from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,610 - Master - INFO - Removed URL https://demo.testfire.net/swagger/index.html from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,610 - Master - INFO - Removed URL https://demo.testfire.net/disclaimer.htm?url=http://www.netscape.com from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,610 - Master - INFO - Removed URL https://demo.testfire.net/disclaimer.htm?url=http://www.microsoft.com from queue (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,716 - Master - INFO - Pruned URL https://demo.testfire.net/login.jsp from in_progress (domain demo.testfire.net limit reached or not allowed)
-2025-04-27 22:00:20,716 - Master - INFO - All domains have reached max_pages_per_domain or are not allowed. Terminating crawl.
-2025-04-27 22:00:20,717 - Master - ERROR - Could not delete crawler.log: [WinError 32] The process cannot access the file because it is being used by another process: 'crawler.log'
-2025-04-27 22:00:20,721 - Master - ERROR - Could not delete indexer.log: [WinError 32] The process cannot access the file because it is being used by another process: 'indexer.log'
-2025-04-27 22:00:20,721 - Master - INFO - Cleaned up all state and files
+2025-04-14 20:58:58,563 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-14 20:58:58,564 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-14 20:58:58,648 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-14 20:58:58,648 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-14 20:58:58,705 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-14 20:58:58,706 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-14 20:58:58,707 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-14 20:58:58,708 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-14 20:58:58,728 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-14 20:58:58,729 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-14 20:59:00,093 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,164 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,125 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,145 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,156 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,285 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,286 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,286 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,286 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,387 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,388 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,391 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,391 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,392 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,491 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,495 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,504 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,505 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,518 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,593 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,596 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,607 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,621 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,694 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,702 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,714 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,722 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,796 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,818 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,819 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,825 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,904 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,923 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,923 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 20:59:00,926 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,046 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,047 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,048 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,147 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,148 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,248 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,248 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,248 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,249 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,348 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,348 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,350 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,449 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,449 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,449 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,450 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,549 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,550 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,551 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,650 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,650 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,650 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,651 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,751 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,751 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,752 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,851 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,851 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,851 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,852 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,952 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,952 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,952 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:00:00,953 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,048 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,071 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,071 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,149 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,172 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,250 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,272 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,350 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,373 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,451 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,473 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,552 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,574 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,652 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,675 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,753 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,775 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,854 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,876 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,954 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:01:00,976 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,012 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,014 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,113 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,115 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,115 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,213 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,215 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,216 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,314 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,318 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,319 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,415 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,420 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,421 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,515 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,520 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,521 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,617 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,621 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,622 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,718 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,722 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,723 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,819 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,822 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,823 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,920 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,923 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,923 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:02:00,924 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,081 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,082 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,082 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,182 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,182 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,182 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,282 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,283 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,383 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,384 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,384 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,483 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,484 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,584 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,585 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,585 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,685 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,685 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,685 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,785 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,786 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,886 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,886 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,886 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,886 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,986 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,986 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,987 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,987 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:03:00,987 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:08:37,857 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:08:37,857 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:08:37,857 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:08:37,857 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:08:37,858 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:08:37,859 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:09:00,069 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,069 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,069 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,171 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,170 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,171 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,272 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,272 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,272 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,373 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,375 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,377 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,473 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,475 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,479 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,575 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,576 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,579 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,676 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,677 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,680 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,778 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,779 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,782 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,881 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,883 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,885 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,982 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,984 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:09:00,986 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:10:25,061 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:10:25,061 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:10:25,062 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:10:25,062 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:10:25,062 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:10:25,062 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:13:08,396 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:13:07.924837'}
+2025-04-14 21:13:08,396 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:13:08,396 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:13:08,401 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:13:07.924837'}
+2025-04-14 21:13:08,402 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:13:08,403 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:13:08,402 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:13:07.924837'}
+2025-04-14 21:13:08,403 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:13:08,404 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:14:00,068 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,068 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,070 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,169 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,169 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,171 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,269 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,270 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,272 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,371 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,373 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,471 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,473 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,572 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,574 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,674 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,676 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,774 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,777 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,875 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,878 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,976 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:14:00,980 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,094 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,094 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,095 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,196 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,197 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,196 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,297 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,297 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,397 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,398 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,498 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,499 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,598 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,600 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,600 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,699 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,700 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,700 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,799 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,801 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,900 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:15:00,902 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,012 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,017 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,023 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,112 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,118 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,125 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,213 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,218 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,226 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,314 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,319 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,326 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,415 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,421 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,428 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,516 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,522 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,529 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,617 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,623 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,630 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,719 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,724 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,731 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,820 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,828 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,832 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,922 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,929 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:16:00,933 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:17:39,621 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:17:39.114691'}
+2025-04-14 21:17:39,622 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:17:39,623 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:17:39,623 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:17:39.114691'}
+2025-04-14 21:17:39,624 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:17:39,624 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:17:39,625 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:17:39.114691'}
+2025-04-14 21:17:39,625 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:17:39,626 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:18:00,022 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,023 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,025 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,123 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,124 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,126 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,228 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,232 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,233 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,328 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,333 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,334 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,430 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,434 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,435 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,541 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,541 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,542 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,642 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,643 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,648 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,744 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,749 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,845 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,845 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,850 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,945 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,945 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:00,951 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:18:01,829 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:18:01.392268'}
+2025-04-14 21:18:01,829 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:18:01.392268'}
+2025-04-14 21:18:01,829 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:18:01.392268'}
+2025-04-14 21:18:01,829 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:18:01,829 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:18:01,829 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:18:01,829 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:18:01,830 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:19:00,100 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,200 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,301 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,301 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,402 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,402 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,402 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,503 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,506 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,605 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,608 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,706 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,710 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,808 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,810 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,909 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:19:00,911 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:22:23,239 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:22:22.740730'}
+2025-04-14 21:22:23,239 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:22:22.740730'}
+2025-04-14 21:22:23,240 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:22:23,240 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:22:23,240 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:22:23,240 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:22:23,240 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:23:00,048 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,049 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,050 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,149 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,151 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,154 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,250 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,252 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,254 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,352 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,353 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,356 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,454 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,457 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,459 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,557 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,559 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,560 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,659 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,661 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,763 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,862 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,864 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,962 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:00,965 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:23:43,609 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA', 'google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:23:43.136704'}
+2025-04-14 21:23:43,609 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA', 'google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:23:43.136704'}
+2025-04-14 21:23:43,609 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:23:43,609 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA', 'google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:23:43.136704'}
+2025-04-14 21:23:43,609 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:23:43,609 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:23:43,610 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:23:43,610 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:23:43,610 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:24:00,050 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,051 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,150 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,152 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,251 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,255 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,351 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,356 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,452 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,457 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,554 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,557 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,655 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,658 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,756 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,759 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,759 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,862 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,862 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,863 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,964 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,965 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:24:00,965 - Master - INFO - Status: Queue=2, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:29:54,962 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:29:54.502776'}
+2025-04-14 21:29:54,963 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:29:54,963 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:29:54,965 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:29:54.502776'}
+2025-04-14 21:29:54,966 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:29:54,966 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:29:54,967 - Master - INFO - Loaded configuration: {'seed_urls': ['youtube.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:29:54.502776'}
+2025-04-14 21:29:54,967 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:29:54,967 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:30:00,021 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,028 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,124 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,128 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,226 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,231 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,229 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,327 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,333 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,333 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,428 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,433 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,434 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,529 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,534 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,535 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,629 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,635 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,730 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,736 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,830 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,837 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,931 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:30:00,937 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,056 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,059 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,091 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,157 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,159 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,192 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,258 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,260 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,293 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,358 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,361 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,393 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,459 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,461 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,500 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,561 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,562 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,602 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,664 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,665 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,703 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,766 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,768 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,806 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,868 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,871 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,907 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,969 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:31:00,973 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:32:10,692 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:32:10.306569'}
+2025-04-14 21:32:10,692 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:32:10.306569'}
+2025-04-14 21:32:10,692 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:32:10.306569'}
+2025-04-14 21:32:10,693 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:32:10,693 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:32:10,693 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:32:10,693 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:32:10,693 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:32:10,693 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:33:00,059 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,061 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,098 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,159 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,161 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,198 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,260 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,261 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,299 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,360 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,362 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,412 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,466 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,466 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,529 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,568 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,571 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,630 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,670 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,672 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,731 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,771 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,773 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,832 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,872 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,874 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,932 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,974 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:33:00,975 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:36:02,296 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:36:01.858079'}
+2025-04-14 21:36:02,297 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:36:02,297 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:36:02,297 - Master - INFO - Loaded configuration: {'seed_urls': ['google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:36:01.858079'}
+2025-04-14 21:36:02,298 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:36:02,298 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:36:02,298 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:36:02,298 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:36:39,198 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:36:38.728951'}
+2025-04-14 21:36:39,199 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:36:39,199 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:36:39,199 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:36:38.728951'}
+2025-04-14 21:36:39,200 - Master - INFO - Active Crawler Nodes: [1]
+d_urls': ['https://www.youtube.com/watch?v=c72PpwlZVSA'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:36:38.728951'}
+2025-04-14 21:36:39,200 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:36:39,200 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:36:39,200 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:37:00,016 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,016 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,016 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,116 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,117 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,217 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,217 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,317 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,318 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,418 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,419 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,519 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,620 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,721 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,721 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,721 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,823 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,823 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,824 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,927 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,928 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:37:00,927 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,002 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,004 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,083 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,103 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,105 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,185 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,205 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,207 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,299 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,307 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,308 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,400 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,409 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,409 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,501 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,510 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,511 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,608 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,611 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,614 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,709 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,712 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,715 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,810 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,815 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,817 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,910 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,916 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:38:00,918 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:40:25,835 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:40:25.473274'}
+2025-04-14 21:40:25,836 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:40:25,836 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:41:00,090 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,191 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,291 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,392 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,492 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,593 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,695 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,795 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,896 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:41:00,996 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,099 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,200 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,300 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,404 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,505 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,606 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,706 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,807 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:42:00,907 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:43:29,580 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:43:29.296463'}
+2025-04-14 21:43:29,581 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:43:29,581 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:43:38,736 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:43:38.468761'}
+2025-04-14 21:43:38,737 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:43:38,737 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:44:00,047 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,147 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,248 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,349 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,449 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,550 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,651 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,751 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,852 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:44:00,953 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,076 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,176 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,277 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,377 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,478 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,679 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:00,780 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:45:01,143 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg', 'google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:45:00.820186'}
+2025-04-14 21:45:01,143 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:45:01,143 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:45:02,134 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg', 'google.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:45:01.884785'}
+2025-04-14 21:45:02,134 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:45:02,134 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:45:29,713 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg', 'https://www.youtube.com/watch?v=g6e90XsBnn0'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:45:29.377189'}
+2025-04-14 21:45:29,713 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:45:29,713 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:45:54,498 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=JxPsBhHfGJg', 'https://www.youtube.com/watch?v=g6e90XsBnn0', 'https://lms.eng.asu.edu.eg/my/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:45:54.137371'}
+2025-04-14 21:45:54,500 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:45:54,500 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:46:00,061 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,162 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,263 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,363 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,464 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,564 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,665 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,766 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,866 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:46:00,967 - Master - INFO - Status: Queue=3, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:51:20,811 - Master - INFO - Loaded configuration: {'seed_urls': ['https://lms.eng.asu.edu.eg/my/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:51:20.554064'}
+2025-04-14 21:51:20,811 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-14 21:51:20,811 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-14 21:52:00,098 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,199 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,300 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,401 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,502 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,602 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,703 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,804 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:52:00,904 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,038 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,139 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,240 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,341 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,441 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,543 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,645 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,747 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,848 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:53:00,949 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,053 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,155 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,256 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,357 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,459 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,562 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,664 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,765 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,865 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:54:00,965 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,047 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,149 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,252 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,355 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,455 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,556 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,657 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,758 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,877 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-14 21:55:00,981 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:23:43,136 - Master - INFO - Loaded configuration: {'seed_urls': ['https://lms.eng.asu.edu.eg/my/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:51:20.554064'}
+2025-04-26 21:23:43,136 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:23:43,137 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:24:00,025 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,126 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,227 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,328 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,430 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,531 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,632 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,733 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,834 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:00,936 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:24:18,959 - Master - INFO - Loaded configuration: {'seed_urls': ['https://lms.eng.asu.edu.eg/my/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:51:20.554064'}
+2025-04-26 21:24:18,960 - Master - INFO - Active Crawler Nodes: [1, 2, 3]
+2025-04-26 21:24:18,961 - Master - INFO - Active Indexer Nodes: [4]
+2025-04-26 21:25:00,074 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,075 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,175 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,175 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,275 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,277 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,376 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,378 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,477 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,478 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,577 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,678 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,679 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,779 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,780 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,881 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,881 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,981 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:25:00,982 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:26:11,365 - Master - INFO - Loaded configuration: {'seed_urls': ['https://lms.eng.asu.edu.eg/my/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-14T21:51:20.554064'}
+2025-04-26 21:26:11,366 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:26:11,366 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:27:00,031 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,135 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,235 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,336 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,436 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,537 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,637 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,738 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,839 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:27:00,939 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,026 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,127 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,228 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,329 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,375 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:28:00.200216'}
+2025-04-26 21:28:00,375 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:28:00,375 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:28:00,376 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,429 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,478 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,530 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,579 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,631 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,679 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,732 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,781 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,833 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,882 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,935 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:28:00,982 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,030 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,086 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,131 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,187 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,232 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,287 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,333 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,388 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,434 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,489 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,534 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,590 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,635 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,691 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,736 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,792 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,837 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,893 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,938 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:29:00,994 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,011 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,052 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,111 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,152 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,212 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,257 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,313 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,358 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,413 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,459 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,514 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,560 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,615 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,660 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,716 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,817 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,861 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,917 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:30:00,962 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,039 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,064 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,139 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,165 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,239 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,265 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,340 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,366 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,441 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,467 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,542 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,568 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,642 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,668 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,743 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,769 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,844 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,870 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,944 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:31:00,971 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,029 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,130 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,231 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,332 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,432 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,533 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,634 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,734 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,835 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:32:00,936 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,004 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,105 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,205 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,306 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,406 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,507 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,608 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,709 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,810 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:33:00,910 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,028 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,229 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,330 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,430 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,531 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,632 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,732 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,832 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:34:00,934 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,063 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,164 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,264 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,365 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,466 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,567 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,667 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,768 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,868 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:35:00,969 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,098 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,199 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,300 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,401 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,501 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,602 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,702 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,802 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:36:00,903 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:37:26,495 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:28:00.200216'}
+2025-04-26 21:37:26,496 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:37:26,496 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:38:00,046 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,146 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,246 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,347 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,448 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,548 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,649 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,749 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,850 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:00,950 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:38:07,628 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:38:07.453542'}
+2025-04-26 21:38:07,628 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:38:07,628 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:38:58,497 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 1, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:38:58.313058'}
+2025-04-26 21:38:58,497 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:38:58,497 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:39:00,004 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,077 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,105 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,178 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,206 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,279 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,307 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,379 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,408 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,480 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,508 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,580 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,609 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,681 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,709 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,781 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,810 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,882 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,910 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:39:00,983 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,048 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,073 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,149 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,173 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,250 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,274 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,351 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,374 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,452 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,475 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,552 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,576 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,653 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,677 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,753 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,777 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,854 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,878 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,955 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:40:00,978 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,052 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,061 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,154 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,165 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,254 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,266 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,355 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,367 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,456 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,468 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,557 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,568 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,657 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,668 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,758 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,769 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,858 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,869 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,959 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:41:00,970 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,068 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,070 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,170 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,172 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,271 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,273 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,372 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,374 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,472 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,474 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,573 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,575 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,673 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,675 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,774 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,776 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,875 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,877 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,975 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:42:00,977 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,049 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,150 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,150 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,251 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,351 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,351 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,452 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,553 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,654 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,755 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,755 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,856 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,856 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:00,956 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:43:58,810 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 1, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:43:58.611165'}
+2025-04-26 21:43:58,810 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:43:58,810 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:44:00,026 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,043 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,126 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,144 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,226 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,245 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,328 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,346 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,428 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,447 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,529 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,547 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,629 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,648 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,729 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,749 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,830 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,850 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,931 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:44:00,950 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,043 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,088 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,144 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,189 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,244 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,289 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,345 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,390 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,446 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,491 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,547 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,592 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,647 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,693 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,748 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,794 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,849 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,894 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,950 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:45:00,995 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,072 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,075 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,172 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,176 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,272 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,277 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,373 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,377 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,473 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,477 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,574 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,674 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,678 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,775 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,778 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,875 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,879 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,975 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:46:00,979 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,066 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,168 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,268 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,369 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,470 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,571 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,571 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,672 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,772 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,873 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,973 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:47:00,973 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,050 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,050 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,151 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,151 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,251 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,254 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,352 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,355 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,454 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,456 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,554 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,557 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,656 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,658 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,757 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,758 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,858 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,859 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,958 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:48:00,959 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,008 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,109 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,210 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,311 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,411 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,512 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,512 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,612 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,612 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,713 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,814 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,814 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,914 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:49:00,914 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,010 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,111 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,212 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,312 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,312 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,413 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,413 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,513 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,513 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,614 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,715 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,715 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,816 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:50:00,917 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,035 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,039 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,136 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,140 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,237 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,241 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,337 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,341 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,438 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,442 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,539 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,543 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,640 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,644 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,741 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,744 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,841 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,845 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,942 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:51:00,945 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 21:59:11,191 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.youtube.com/watch?v=7E6um7NGmeE&t=35928s&ab_channel=GreatStack'], 'max_depth': 1, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:43:58.611165'}
+2025-04-26 21:59:11,191 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:59:11,192 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 21:59:52,000 - Master - INFO - Loaded configuration: {'seed_urls': ['https://translate.google.com/?sl=en&tl=ar&op=translate'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T21:59:51.833778'}
+2025-04-26 21:59:52,001 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 21:59:52,001 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:00:00,040 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,040 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,141 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,141 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,242 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,343 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,448 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,448 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,548 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,548 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,649 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,750 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,851 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,851 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,951 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:00:00,951 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,072 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,072 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,173 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,273 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,374 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,474 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,575 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,575 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,676 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,777 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,878 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,878 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,978 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:01:00,978 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,016 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,016 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,117 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,119 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,219 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,221 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,322 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,322 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,422 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,522 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,624 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,724 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,724 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,825 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,925 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:02:00,926 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,039 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,140 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,241 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,342 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,442 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,442 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,543 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,644 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,744 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,845 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,946 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:00,946 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:03:26,261 - Master - INFO - Loaded configuration: {'seed_urls': ['http://example.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:03:26.101036'}
+2025-04-26 22:03:26,261 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:03:26,261 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:04:00,042 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,142 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,243 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,243 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,344 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,344 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,444 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,445 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,545 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,546 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,646 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,747 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,847 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,948 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:00,948 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:04:38,163 - Master - INFO - Loaded configuration: {'seed_urls': ['http://example.com'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': True, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:04:37.968462'}
+2025-04-26 22:04:38,164 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:04:38,164 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:05:00,069 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,070 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,169 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,170 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,270 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,271 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,371 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,372 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,471 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,472 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,572 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,572 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,673 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,673 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,773 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,773 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,874 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,874 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,974 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:00,974 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:05:11,613 - Master - INFO - Loaded configuration: {'seed_urls': ['https://translate.google.com/?sl=en&tl=ar&op=translate'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': True, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:05:11.416137'}
+2025-04-26 22:05:11,614 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:05:11,614 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:06:00,070 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,171 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,271 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,372 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,472 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,572 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,573 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,674 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,674 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,775 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,876 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,976 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:06:00,976 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,089 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,189 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,290 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,391 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,492 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,592 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,693 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,794 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,894 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:00,995 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:07:35,706 - Master - INFO - Loaded configuration: {'seed_urls': ['https://translate.google.com/?sl=en&tl=ar&op=translate'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': True, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:05:11.416137'}
+2025-04-26 22:07:35,707 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:07:35,707 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:07:53,292 - Master - INFO - Loaded configuration: {'seed_urls': ['https://translate.google.com/?sl=en&tl=ar&op=translate'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:07:53.125794'}
+2025-04-26 22:07:53,292 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:07:53,292 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:08:00,026 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,052 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,128 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,154 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,229 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,255 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,329 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,355 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,430 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,456 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,530 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,556 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,630 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,657 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,731 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,758 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,831 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,859 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,932 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:08:00,959 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,010 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,090 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,111 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,191 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,212 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,292 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,312 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,392 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,413 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,493 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,514 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,594 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,614 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,695 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,715 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,796 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,815 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,897 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:09:00,916 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,028 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,231 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,332 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,432 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,533 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,533 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,634 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,634 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,734 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,835 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:10:00,936 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,034 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,034 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,135 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,236 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,337 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,438 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,539 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,640 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,740 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,841 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,941 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:11:00,941 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,082 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,183 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,183 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,284 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,284 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,385 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,386 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,486 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,486 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,586 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,587 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,687 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,687 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,788 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,788 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,889 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:12:00,989 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,076 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,080 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,176 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,180 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,277 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,281 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,378 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,382 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,479 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,483 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,579 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,583 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,680 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,684 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,781 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,784 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,881 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,886 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,982 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:13:00,986 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,029 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,029 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,130 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,231 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,333 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,434 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,535 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,636 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,737 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,737 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,838 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,838 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:14:00,939 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,042 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,042 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,143 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,143 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,244 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,345 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,445 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,546 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,546 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,647 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,647 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,747 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,848 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:15:00,948 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,070 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,090 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,171 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,190 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,271 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,291 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,372 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,393 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,473 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,493 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,574 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,594 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,675 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,694 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,775 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,795 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,876 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,896 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,976 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:16:00,996 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,035 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,072 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,136 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,173 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,237 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,273 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,338 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,376 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,439 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,476 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,539 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,577 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,640 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,678 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,740 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,778 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,841 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,879 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,942 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:17:00,980 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,017 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,067 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,117 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,168 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,218 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,269 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,319 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,370 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,422 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,471 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,523 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,571 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,624 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,672 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,724 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,773 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,824 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,873 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,925 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:18:00,974 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,075 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,089 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,175 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,189 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,276 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,290 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,377 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,391 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,477 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,492 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,592 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,679 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,693 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,779 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,793 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,880 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,894 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,981 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:19:00,995 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,083 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,087 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,184 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,187 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,285 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,288 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,386 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,389 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,487 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,490 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,588 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,591 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,688 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,691 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,789 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,792 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,890 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,893 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,990 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:20:00,993 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,055 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,055 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,156 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,257 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,257 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,357 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,458 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,458 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,559 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,559 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,660 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,660 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,861 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:21:00,962 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,084 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,184 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,285 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,386 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,386 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,486 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,587 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,688 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,788 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,889 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,890 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,989 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:22:00,990 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,073 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,073 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,174 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,275 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,376 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,477 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,477 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,578 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,679 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,780 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,881 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:23:00,982 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,032 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,133 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,133 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,233 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,334 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,334 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,435 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,435 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,535 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,536 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,636 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,637 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,737 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,738 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,837 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,838 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,938 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:24:00,938 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,028 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,029 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,129 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,230 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,331 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,433 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,533 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,634 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,634 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,735 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,735 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,836 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:25:00,936 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,024 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,125 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,226 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,327 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,327 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,428 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,529 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,631 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,732 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,832 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,832 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:26:00,932 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,044 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,045 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,145 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,146 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,245 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,247 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,346 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,348 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,447 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,449 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,548 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,550 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,649 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,650 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,750 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,751 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,851 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,852 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,951 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:00,952 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:27:59,057 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.wikipedia.org/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:27:58.815483'}
+2025-04-26 22:27:59,058 - Master - INFO - Active Crawler Nodes: [1]
+2025-04-26 22:27:59,058 - Master - INFO - Active Indexer Nodes: [2]
+2025-04-26 22:28:00,034 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,063 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,135 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,164 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,236 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,265 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,337 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,366 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,438 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,468 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,539 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,568 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,640 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,669 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,740 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,770 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,841 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,870 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,941 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:00,971 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:28:43,517 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.wikipedia.org/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:27:58.815483'}
+2025-04-26 22:28:43,518 - Master - INFO - Active Crawler Nodes: [1, 2]
+2025-04-26 22:28:43,518 - Master - INFO - Active Indexer Nodes: [3]
+2025-04-26 22:29:00,001 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,057 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,102 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,159 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,203 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,259 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,304 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,360 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,405 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,460 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,506 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,561 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,607 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,661 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,707 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,807 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,862 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,908 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:29:00,962 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:33:02,242 - Master - INFO - Loaded configuration: {'seed_urls': ['https://www.wikipedia.org/'], 'max_depth': 3, 'max_pages_per_domain': 1000, 'respect_robots': False, 'crawl_delay': 1.0, 'allowed_domains': [''], 'start_time': '2025-04-26T22:27:58.815483'}
+2025-04-26 22:33:02,243 - Master - INFO - Active Crawler Nodes: [1, 2]
+2025-04-26 22:33:02,243 - Master - INFO - Active Indexer Nodes: [3]
+2025-04-26 22:34:00,055 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,155 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,256 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,356 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,457 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,558 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,660 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,761 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,861 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:34:00,962 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,071 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,172 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,272 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,373 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,474 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,575 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,676 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,777 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,877 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:35:00,979 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,096 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,197 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,298 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,399 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,500 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,601 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,703 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,803 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:36:00,904 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,013 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,114 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,215 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,315 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,416 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,517 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,624 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,726 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,826 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:37:00,927 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,071 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,172 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,272 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,373 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,474 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,574 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,675 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,776 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,876 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:38:00,977 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,097 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,198 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,324 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,424 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,525 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,626 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,726 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,827 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:39:00,928 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,017 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,119 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,219 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,320 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,420 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,522 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,622 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,723 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,824 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:40:00,924 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+
+2025-04-26 22:41:00,111 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,212 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,314 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,415 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,516 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,617 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,718 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,818 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0
+2025-04-26 22:41:00,919 - Master - INFO - Status: Queue=1, In Progress=0, Completed=0, Failed=0

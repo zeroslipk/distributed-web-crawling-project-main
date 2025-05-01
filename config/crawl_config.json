@@ -1,13 +1,13 @@
 {
   "seed_urls": [
-    "https://demo.testfire.net/"
+    "https://www.reddit.com/dev/api"
   ],
   "max_depth": 3,
-  "max_pages_per_domain": 5,
-  "respect_robots": false,
+  "max_pages_per_domain": 3,
+  "respect_robots": true,
   "crawl_delay": 1.0,
   "allowed_domains": [
-    "demo.testfire.net"
+    "reddit.com/dev/api"
   ],
-  "start_time": "2025-04-27T21:58:18.721624"
+  "start_time": "2025-05-01T23:39:07.081742"
 }

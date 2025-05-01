@@ -46,10 +46,11 @@ class CrawlState:
     def should_crawl_domain(self, domain):
         """Check if domain is allowed based on configuration"""
         allowed_domains = self.config.get('allowed_domains')
-        # If allowed_domains is None or empty, allow all domains
         if not allowed_domains or all(not d for d in allowed_domains):
             return True
-        return domain in allowed_domains
+        # Normalize domain for comparison
+        normalized_domain = domain.lower()
+        return any(normalized_domain == allowed.lower() or normalized_domain.endswith('.' + allowed.lower()) for allowed in allowed_domains)
 
     def can_crawl_domain(self, domain):
         """Check if domain has not reached max_pages_per_domain"""
@@ -105,21 +106,21 @@ def cleanup_state():
     """Clean up all state and files"""
     try:
         # Close logging handlers
+        for handler in logging.getLogger().handlers[:]:  # Copy to avoid modifying while iterating
+            handler.close()
+            logging.getLogger().removeHandler(handler)
         logging.shutdown()
         
         # Delete state files
         if os.path.exists('crawl_state.json'):
             os.remove('crawl_state.json')
-        if os.path.exists('crawler.log'):
-            try:
-                os.remove('crawler.log')
-            except Exception as e:
-                logging.error(f"Could not delete crawler.log: {e}")
-        if os.path.exists('indexer.log'):
-            try:
-                os.remove('indexer.log')
-            except Exception as e:
-                logging.error(f"Could not delete indexer.log: {e}")
+        for log_file in ['master.log', 'crawler.log', 'indexer.log']:
+            if os.path.exists(log_file):
+                try:
+                    os.remove(log_file)
+                    logging.info(f"Deleted {log_file}")
+                except Exception as e:
+                    logging.error(f"Could not delete {log_file}: {e}")
         
         # Clear all state
         if 'state' in globals():
@@ -228,7 +229,9 @@ def master_process():
     
     # Load configuration
     try:
-        with open('config/crawl_config.json', 'r') as f:
+        config_path = os.path.abspath('config/crawl_config.json')
+        logging.info(f"Attempting to load configuration from {config_path}")
+        with open(config_path, 'r') as f:
             config = json.load(f)
             seed_urls = config['seed_urls']
             max_depth = config['max_depth']
@@ -237,6 +240,9 @@ def master_process():
             crawl_delay = config['crawl_delay']
             allowed_domains = config['allowed_domains']
             logging.info(f"Loaded configuration: {config}")
+    except FileNotFoundError:
+        logging.error(f"Configuration file not found at {config_path}")
+        sys.exit(1)
     except Exception as e:
         logging.warning(f"Could not load config, using defaults: {e}")
         seed_urls = ["http://example.com"]
@@ -270,18 +276,26 @@ def master_process():
     for url in seed_urls:
         if url not in state.seen_urls:
             domain = urlparse(url).netloc
-            if state.can_crawl_domain(domain) and state.should_crawl_domain(domain):
-                state.url_queue.append(url)
-                state.seen_urls.add(url)
-                state.domain_counts[domain] += 1
-                logging.info(f"Added seed URL {url} for domain {domain}")
+            if state.should_crawl_domain(domain):
+                if state.can_crawl_domain(domain):
+                    state.url_queue.append(url)
+                    state.seen_urls.add(url)
+                    state.domain_counts[domain] += 1
+                    logging.info(f"Added seed URL {url} for domain {domain}")
+                else:
+                    logging.info(f"Skipped seed URL {url} (domain {domain} has reached max_pages_per_domain: {state.domain_counts[domain]}/{state.config['max_pages_per_domain']})")
             else:
-                logging.info(f"Skipped seed URL {url} (domain {domain} limit reached or not allowed)")
+                logging.info(f"Skipped seed URL {url} (domain {domain} not in allowed_domains: {state.config['allowed_domains']})")
+        else:
+            logging.info(f"Skipped seed URL {url} (already seen)")
 
     # Main loop
     while state.url_queue or state.in_progress:
         # Prune queue and in_progress to respect domain limits
         prune_queue_and_in_progress(state)
+
+        # Log current state
+        logging.info(f"Queue size: {len(state.url_queue)}, In progress: {len(state.in_progress)}, Completed: {len(state.completed)}, Failed: {len(state.failed)}")
 
         # Check if all domains have reached their limit
         all_domains_done = True

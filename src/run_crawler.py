@@ -6,6 +6,10 @@ import logging.handlers
 # -------- CLEAR OLD LOGS FIRST -------- #
 def clear_old_logs():
     """Delete previous log files if they exist"""
+    # Close any existing logging handlers
+    for handler in logging.getLogger().handlers[:]:
+        handler.close()
+        logging.getLogger().removeHandler(handler)
     logging.shutdown()
     
     logs = ['master.log', 'indexer.log', 'crawler.log']

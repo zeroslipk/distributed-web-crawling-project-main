@@ -163,11 +163,15 @@ class WebCrawler:
 def cleanup_crawler():
     try:
         # Close logging handlers
+        for handler in logging.getLogger().handlers[:]:
+            handler.close()
+            logging.getLogger().removeHandler(handler)
         logging.shutdown()
         
         if os.path.exists('crawler.log'):
             try:
                 os.remove('crawler.log')
+                logging.info("Deleted crawler.log")
             except Exception as e:
                 logging.error(f"Could not delete crawler.log: {e}")
         logging.info("Crawler cleanup completed")
