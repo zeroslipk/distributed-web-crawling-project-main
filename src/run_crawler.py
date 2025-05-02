@@ -5,6 +5,8 @@ import logging.handlers
 import time
 from mpi4py import MPI
 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "distributed-web-crawling-project-main\config\distributed_crawler.json"
+
 def check_running_instance():
     """Check if another instance is running using a lock file"""
     lock_file = 'crawler.lock'

@@ -1,4 +1,3 @@
-mpi4py>=3.1.4
 requests>=2.31.0
 beautifulsoup4>=4.12.2
 scrapy>=2.11.0
@@ -6,9 +5,37 @@ redis>=5.0.1
 celery>=5.3.6
 whoosh>=2.7.4
 elasticsearch>=8.11.1
-boto3>=1.34.34  # For AWS S3
+
+# AWS libraries (optional)
+boto3>=1.34.34
+
+# Environment and utility libraries
 python-dotenv>=1.0.0
+pyyaml>=6.0.1
+
+# HTTP libraries
 aiohttp>=3.9.1
 lxml>=5.1.0
 robotexclusionrulesparser>=1.7.1
+
+# Database libraries
 pymongo>=4.6.1
+
+# Google Cloud libraries
+google-cloud-storage>=2.12.0
+google-cloud-pubsub>=2.18.4
+google-cloud-logging>=3.8.0
+google-cloud-monitoring>=2.18.0
+google-cloud-firestore>=2.11.0
+google-cloud-tasks>=2.13.0
+google-auth>=2.22.0
+google-api-python-client>=2.100.0
+
+# Web server libraries
+flask>=2.3.3
+gunicorn>=21.2.0
+
+# HTTP client retry and fallback libraries
+urllib3>=1.26.18
+retry>=0.9.2
+backoff>=2.2.1

@@ -1,0 +1,25 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code
+COPY src/ ./src/
+COPY config/ ./config/
+RUN mkdir -p data/search_requests data/search_results
+
+# Environment variables
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/config/distributed_crawler.json
+ENV COMPONENT_TYPE=indexer
+
+# Run the indexer component
+CMD ["python", "-m", "src.gcloud_indexer"] 

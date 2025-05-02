@@ -1,0 +1,15 @@
+{
+  "in_progress": [],
+  "completed": [
+    "https://www.bbc.com/"
+  ],
+  "failed": [],
+  "seen_urls": [
+    "https://www.bbc.com/"
+  ],
+  "domain_counts": {
+    "www.bbc.com": 1
+  },
+  "timestamp": "2025-05-02T19:31:08.556258",
+  "is_running": true
+}

@@ -1,4 +1,34 @@
-# Distributed Web Crawler and Indexer
+# Distributed Web Crawler
+
+## Recent Updates (v2.0)
+
+This project has been significantly enhanced with the following improvements:
+
+1. **Cloud/Local Hybrid Operation**: The system now gracefully falls back to local file-based operation when Google Cloud services are unavailable or have permission issues.
+
+2. **Improved Resilience**:
+   - All components can now operate without Google Cloud dependencies
+   - Automatic detection of missing or invalid credentials
+   - Seamless transition between cloud and local modes
+
+3. **Flexible Deployment Options**:
+   - Run with full Google Cloud integration
+   - Run in completely local mode with `--local` flag
+   - Docker containers support both modes via environment variables
+
+4. **Enhanced Error Handling**:
+   - Proper handling of permission issues
+   - Automatic recovery from service disruptions
+   - Comprehensive logging for troubleshooting
+
+5. **Simplified Configuration**:
+   - Configuration from Cloud Storage, local files, or environment variables
+   - Service account auto-detection
+   - Sensible defaults for all settings
+
+For running with Google Cloud or in local-only mode, see [`DOCKER_GCP_README.md`](DOCKER_GCP_README.md).
+
+## Original Project Overview
 
 A distributed web crawling and indexing system implemented in Python using MPI for distributed computing. The system efficiently crawls websites while respecting robots.txt directives and builds a searchable index of web pages.
 
