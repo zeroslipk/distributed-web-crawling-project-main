@@ -5,6 +5,7 @@ WORKDIR /app
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code
 COPY src/ ./src/
 COPY config/ ./config/
-RUN mkdir -p data/html
+RUN mkdir -p data/html data/state data/index data/urls/to_index data/urls/indexed data/urls/failed
 
 # Environment variables
 ENV GOOGLE_APPLICATION_CREDENTIALS=/app/config/distributed_crawler.json
@@ -24,6 +25,15 @@ ENV CRAWLER_MAX_DEPTH=3
 ENV CRAWLER_MAX_PAGES_PER_DOMAIN=25
 ENV CRAWLER_RESPECT_ROBOTS=true
 ENV CRAWLER_CRAWL_DELAY=1.0
+ENV PYTHONUNBUFFERED=1
+ENV LOG_LEVEL=INFO
+
+# Expose port for health checks
+EXPOSE 8080
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
 
 # Run the crawler component
-CMD ["python", "-m", "src.gcloud_crawler"] 
+CMD ["python", "src/run_gcloud_crawler.py", "crawler"] 

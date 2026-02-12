@@ -1,405 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distributed Web Crawler</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container { max-width: 800px; }
-        .status-card { margin: 20px 0; }
-        #searchResults { margin-top: 20px; }
-        .section {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-        #status-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        #status-info, #worker-stats, #domain-stats {
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border: 1px solid #dee2e6;
-        }
-        #status-info p, #worker-stats p, #domain-stats p {
-            margin: 5px 0;
-            padding: 5px;
-            border-bottom: 1px solid #eee;
-        }
-        #worker-info p, #domain-info p {
-            background-color: #fff;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        h3 {
-            margin-bottom: 15px;
-            color: #495057;
-            font-size: 1.1em;
-        }
-        #crawl-status {
-            font-weight: bold;
-        }
-        #crawl-status:empty:before {
-            content: "No crawl in progress";
-            color: #6c757d;
-        }
-        #htmlContent {
-            max-height: 70vh;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-        }
-        .view-html-btn {
-            margin-left: 10px;
-        }
-    </style>
+    <title>Goliath - Global Distributed Intelligence & Search</title>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS Utilities -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/index.css">
 </head>
+
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Distributed Web Crawler</h1>
-        
-        <!-- Crawl Configuration Form -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Start New Crawl</h5>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"
+                    style="color: var(--primary-color);">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                Goliath
+            </h1>
+        </div>
+        <nav class="nav-links">
+            <li class="nav-item">
+                <a href="#dashboard-section" id="nav-dashboard" class="nav-link active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#search-section" id="nav-search" class="nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    Search Engine
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#crawler-section" id="nav-crawler" class="nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-play-circle">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="10 8 16 12 10 16 10 8"></polyline>
+                    </svg>
+                    Crawler Control
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#logs-section" id="nav-logs" class="nav-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    Live Logs
+                </a>
+            </li>
+        </nav>
+        <div class="sidebar-footer" style="padding-top: 2rem; border-top: 1px solid #1e293b;">
+            <p style="font-size: 0.75rem; color: #64748b; font-weight: 500;">NETWORK VERSION v2.0.4<br>NODE CLUSTER:
+                <span class="text-success" style="font-weight: 700;">STABLE</span></p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">System Overview</h2>
+                <p class="section-subtitle">Real-time health and throughput metrics from the global node cluster.</p>
             </div>
-            <div class="card-body">
+
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Queue Depth</div>
+                    <div class="stat-value" id="queueSizeValue">0</div>
+                    <div class="mt-3 small text-muted">Awaiting ingestion from discovery nodes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Crawled Nodes</div>
+                    <div class="stat-value" id="completedUrlsValue">0</div>
+                    <div class="mt-3 small text-muted">Knowledge objects successfully mapped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Cluster Anomalies</div>
+                    <div class="stat-value" id="failedUrlsValue">0</div>
+                    <div class="mt-3 small text-muted">Blocked domains or endpoint timeouts</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Hub Section -->
+        <section id="search-section">
+            <div class="section-header">
+                <h2 class="section-title">Goliath Search</h2>
+                <p class="section-subtitle">Query the unified distributed knowledge index.</p>
+            </div>
+
+            <div class="search-hub">
+                <div class="search-form-wrapper">
+                    <form id="searchForm">
+                        <div class="input-group-custom">
+                            <select id="fieldSelect">
+                                <option value="content">Content</option>
+                                <option value="url">URL</option>
+                            </select>
+                            <input type="text" id="searchInput" placeholder="Search the universal web crawl..."
+                                required>
+                            <button type="submit" class="search-btn-custom">Retrieve</button>
+                        </div>
+                    </form>
+
+                    <form id="urlCheckForm" class="mt-5">
+                        <div style="max-width: 550px; margin: 0 auto; display: flex; gap: 0.75rem;">
+                            <input type="url" id="urlInput" class="form-control"
+                                style="border-radius: 100px; padding: 0.875rem 1.5rem; border: 1px solid var(--border-color); background: #f8fafc;"
+                                placeholder="Verify node coverage via URL..." required>
+                            <button type="submit" class="btn-outline-saas" style="padding: 0 2rem;">Verify</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="searchResults" class="mt-5 text-start" style="max-width: 900px; margin: 5rem auto 0 auto;">
+                    <!-- Result items injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Crawler Controls Section -->
+        <section id="crawler-section">
+            <div class="section-header">
+                <h2 class="section-title">Crawler Control</h2>
+                <p class="section-subtitle">Orchestrate the distributed crawling behavior and node parameters.</p>
+            </div>
+
+            <div class="card border-0 shadow-sm p-4"
+                style="border-radius: 24px; border: 1px solid var(--border-color) !important;">
                 <form id="crawlForm">
-                    <div class="mb-3">
-                        <label for="urls" class="form-label">Seed URLs (one per line)</label>
-                        <textarea class="form-control" id="urls" name="urls" rows="3" required></textarea>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="depth" class="form-label">Max Depth</label>
-                                <input type="number" class="form-control" id="depth" name="depth" value="3" min="1">
-                            </div>
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-secondary">DISCOVERY SEED URLS
+                                (Multiline)</label>
+                            <textarea class="form-control bg-light border-0" id="urls" name="urls" rows="3" required
+                                style="border-radius: 16px; padding: 1rem;">https://news.ycombinator.com</textarea>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="limit" class="form-label">Pages per Domain</label>
-                                <input type="number" class="form-control" id="limit" name="limit" value="1000" min="1">
-                            </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold small text-secondary">MAX DEPTH</label>
+                            <input type="number" class="form-control bg-light border-0" id="depth" name="depth"
+                                value="2" min="1" max="10" style="border-radius: 12px; padding: 0.75rem;">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold small text-secondary">MAX PAGES</label>
+                            <input type="number" class="form-control bg-light border-0" id="limit" name="limit"
+                                value="100" min="1" max="1000" style="border-radius: 12px; padding: 0.75rem;">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold small text-secondary">DELAY (S)</label>
+                            <input type="number" class="form-control bg-light border-0" id="delay" name="delay"
+                                value="1" min="0" step="0.1" style="border-radius: 12px; padding: 0.75rem;">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold small text-secondary">SCOPE (DOMAIN)</label>
+                            <input type="text" class="form-control bg-light border-0" id="allowed_domains"
+                                name="allowed_domains" placeholder="example.com"
+                                style="border-radius: 12px; padding: 0.75rem;">
+                        </div>
+                        <div class="col-12 d-flex gap-3 pt-3">
+                            <button type="submit" class="btn-primary-saas">Initialize Cluster Crawl</button>
+                            <button type="button" id="stopCrawl" class="btn-outline-saas text-danger">Shutdown
+                                Cluster</button>
+                            <button type="button" id="retryFailed" class="btn-outline-saas text-primary">Resume
+                                Failures</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="delay" class="form-label">Crawl Delay (seconds)</label>
-                                <input type="number" class="form-control" id="delay" name="delay" value="1.0" step="0.1" min="0.1">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="nodes" class="form-label">Number of Nodes</label>
-                                <input type="number" class="form-control" id="nodes" name="nodes" value="3" min="3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="allowed_domains" class="form-label">Allowed Domains (comma-separated)</label>
-                        <input type="text" class="form-control" id="allowed_domains" name="allowed_domains">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="respect_robots" name="respect_robots" checked>
-                        <label class="form-check-label" for="respect_robots">Respect robots.txt</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Start Crawl</button>
-                    <button type="button" id="stopCrawl" class="btn btn-danger">Stop Crawl</button>
                 </form>
             </div>
-        </div>
+        </section>
 
-        <!-- Status Section -->
-        <div class="section">
-            <h2>Crawl Status</h2>
-            <div id="status-container">
-                <div id="status-info">
-                    <p>Queue Size: <span id="queue-size">-</span></p>
-                    <p>URLs In Progress: <span id="in-progress">-</span></p>
-                    <p>Completed URLs: <span id="completed">-</span></p>
-                    <p>Failed URLs: <span id="failed">-</span></p>
-                    <p>Last Update: <span id="last-update">-</span></p>
-                    <p>Status: <span id="crawl-status">No crawl in progress</span></p>
-                </div>
-                <div id="worker-stats">
-                    <h3>Worker Statistics</h3>
-                    <div id="worker-info"></div>
-                </div>
-                <div id="domain-stats">
-                    <h3>Domain Statistics</h3>
-                    <div id="domain-info"></div>
-                </div>
+        <!-- Live Logs Section -->
+        <section id="logs-section">
+            <div class="section-header">
+                <h2 class="section-title">Node Telemetry</h2>
+                <p class="section-subtitle">Real-time debug and status stream from active crawler nodes.</p>
             </div>
-        </div>
 
-        <!-- Search Section -->
-        <div class="section">
-            <h2>Search Indexed Content</h2>
-            <form id="searchForm" class="mb-3">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="query" placeholder="Enter search query">
-                    <select class="form-select" name="field" style="max-width: 150px;">
-                        <option value="content">Content</option>
-                        <option value="url">URL</option>
-                        <option value="title">Title</option>
-                    </select>
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-            </form>
-
-            <!-- URL Check Form -->
-            <form id="urlCheckForm" class="mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="url" placeholder="Enter URL to check if crawled">
-                    <button class="btn btn-secondary" type="submit">Check URL</button>
-                </div>
-            </form>
-            <div id="urlCheckResult" class="alert" style="display: none;"></div>
-
-            <div id="searchResults"></div>
-        </div>
-
-        <!-- HTML Content Modal -->
-        <div class="modal fade" id="htmlModal" tabindex="-1" aria-labelledby="htmlModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="htmlModalLabel">HTML Content</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="card border-0 shadow-lg" style="border-radius: 20px; overflow: hidden; background: #0f172a;">
+                <div class="card-header border-0 d-flex justify-content-between align-items-center px-4 py-3"
+                    style="background: #1e293b;">
+                    <div class="d-flex align-items-center gap-2">
+                        <div
+                            style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;">
+                        </div>
+                        <span class="text-white small fw-bold" style="letter-spacing: 0.05em;">LIVE STREAM</span>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <strong>URL: </strong><span id="modalUrl"></span>
-                        </div>
-                        <div class="border p-3 bg-light">
-                            <pre><code id="htmlContent" class="html"></code></pre>
-                        </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-sm px-3 btn-outline-light active"
+                            id="showAllLogs">ALL</button>
+                        <button type="button" class="btn btn-sm px-3 btn-outline-light"
+                            id="showMasterLogs">MASTER</button>
+                        <button type="button" class="btn btn-sm px-3 btn-outline-light"
+                            id="showCrawlerLogs">CRAWLER</button>
+                        <button type="button" class="btn btn-sm px-3 btn-outline-light"
+                            id="showIndexerLogs">INDEXER</button>
+                        <button type="button" class="btn btn-sm px-3 btn-outline-warning ms-3 border-warning"
+                            id="debugLogs">DIAGNOSTIC</button>
                     </div>
                 </div>
+                <div id="logsContainer" class="terminal-viewer">
+                    <div class="text-muted" style="opacity: 0.4; font-size: 0.8rem; letter-spacing: 0.02em;">Goliath OS
+                        System v2.0.4 - Initializing telemetry connection...</div>
+                </div>
             </div>
-        </div>
+        </section>
+    </main>
+
+    <!-- Notifications Container -->
+    <div id="notifications"
+        style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 2000; width: 400px; display: flex; flex-direction: column; gap: 0.75rem;">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Update status every 2 seconds
-        function updateStatus() {
-            fetch('/status')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        document.getElementById('crawl-status').textContent = data.error;
-                        return;
-                    }
+        document.addEventListener('DOMContentLoaded', function () {
+            // High-End Notification logic
+            function showNotification(message, type = 'success') {
+                const notificationsDiv = document.getElementById('notifications');
+                const notification = document.createElement('div');
+                const bgClass = type === 'success' ? 'bg-white' : (type === 'danger' ? 'bg-danger text-white' : 'bg-warning');
+                const borderClass = type === 'success' ? 'border-primary' : '';
 
-                    // Update basic stats
-                    document.getElementById('queue-size').textContent = data.queue_size || 0;
-                    document.getElementById('in-progress').textContent = data.in_progress || 0;
-                    document.getElementById('completed').textContent = data.completed || 0;
-                    document.getElementById('failed').textContent = data.failed || 0;
-                    document.getElementById('last-update').textContent = data.last_update || '-';
-                    document.getElementById('crawl-status').textContent = data.is_running ? 'Running' : 'Stopped';
+                notification.className = `alert shadow-xl ${bgClass} p-4 fade show border-0 d-flex align-items-start gap-3`;
+                notification.style.borderRadius = "16px";
+                notification.style.borderLeft = type === 'success' ? "6px solid var(--primary-color)" : "6px solid transparent";
 
-                    // Update worker stats
-                    const workerInfo = document.getElementById('worker-info');
-                    workerInfo.innerHTML = '';
-                    if (data.worker_stats) {
-                        Object.entries(data.worker_stats).forEach(([rank, stats]) => {
-                            workerInfo.innerHTML += `
-                                <p>Worker ${rank}:<br>
-                                URLs Processed: ${stats.urls_processed}<br>
-                                Status: ${stats.status}</p>
-                            `;
-                        });
-                    }
-
-                    // Update domain stats
-                    const domainInfo = document.getElementById('domain-info');
-                    domainInfo.innerHTML = '';
-                    if (data.domain_counts) {
-                        Object.entries(data.domain_counts).forEach(([domain, count]) => {
-                            domainInfo.innerHTML += `
-                                <p>${domain}: ${count} pages</p>
-                            `;
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching status:', error);
-                    document.getElementById('crawl-status').textContent = 'Error fetching status';
-                });
-        }
-
-        // Start periodic status updates
-        setInterval(updateStatus, 2000);
-
-        // Initial status update
-        updateStatus();
-
-        // Handle crawl form submission
-        document.getElementById('crawlForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            fetch('/start_crawl', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Crawl started successfully');
-                    updateStatus();
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            });
-        });
-
-        // Handle stop crawl button
-        document.getElementById('stopCrawl').addEventListener('click', function() {
-            if (!confirm('Are you sure you want to stop the crawl?')) {
-                return;
+                notification.innerHTML = `
+                    <div class="flex-grow-1">
+                        <div class="fw-bold mb-1 small uppercase" style="letter-spacing: 0.1em; opacity: 0.8;">System ${type.toUpperCase()}</div>
+                        <div style="font-size: 0.95rem;">${message}</div>
+                    </div>
+                    <button type="button" class="btn-close ${type === 'danger' ? 'btn-close-white' : ''}" data-bs-dismiss="alert"></button>
+                `;
+                notificationsDiv.appendChild(notification);
+                setTimeout(() => { if (notification.parentNode) notification.parentNode.removeChild(notification); }, 6000);
             }
-            
-            this.disabled = true;
-            this.textContent = 'Stopping...';
-            
-            fetch('/stop_crawl', {
-                method: 'POST'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('crawl-status').textContent = 'Stopped';
-                    alert(data.message);
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error stopping crawl:', error);
-                alert('Error stopping crawl. Please check the console for details.');
-            })
-            .finally(() => {
-                this.disabled = false;
-                this.textContent = 'Stop Crawl';
-                updateStatus();
-            });
-        });
 
-        // Add this function to handle viewing HTML content
-        function viewHtml(url) {
-            const formData = new FormData();
-            formData.append('url', url);
-            
-            fetch('/get_html', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    document.getElementById('modalUrl').textContent = data.url;
-                    document.getElementById('htmlContent').textContent = data.html;
-                    new bootstrap.Modal(document.getElementById('htmlModal')).show();
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching HTML:', error);
-                alert('Error fetching HTML content. Please check the console for details.');
-            });
-        }
+            // Scroll-Spy & Active Link logic via IntersectionObserver
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-        // Update the search results rendering to include the View HTML button
-        document.getElementById('searchForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            fetch('/search', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultsDiv = document.getElementById('searchResults');
-                if (data.error) {
-                    resultsDiv.innerHTML = `<p class="text-danger mt-3">${data.error}</p>`;
-                } else if (data.length === 0) {
-                    resultsDiv.innerHTML = '<p class="mt-3">No results found</p>';
-                } else {
-                    let html = '<div class="mt-3"><h6>Search Results:</h6>';
-                    data.forEach((result, i) => {
-                        html += `
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <h6 class="card-title">${i + 1}. ${result.title}</h6>
-                                    <p class="card-text">
-                                        <a href="${result.url}" target="_blank">${result.url}</a>
-                                        <button class="btn btn-sm btn-secondary view-html-btn" onclick="viewHtml('${result.url}')">
-                                            View HTML
-                                        </button>
-                                    </p>
-                                    <p class="card-text"><small class="text-muted">Score: ${result.score.toFixed(2)} | Indexed: ${result.timestamp}</small></p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    html += '</div>';
-                    resultsDiv.innerHTML = html;
-                }
-            });
-        });
+            const observerOptions = {
+                root: null,
+                threshold: 0.3,
+                rootMargin: "-10% 0px -70% 0px"
+            };
 
-        // Add URL check form handler
-        document.getElementById('urlCheckForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            
-            fetch('/check_url', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('urlCheckResult');
-                resultDiv.style.display = 'block';
-                
-                if (data.error) {
-                    resultDiv.className = 'alert alert-danger';
-                    resultDiv.textContent = data.error;
-                } else {
-                    resultDiv.className = data.crawled ? 'alert alert-success' : 'alert alert-info';
-                    resultDiv.textContent = data.message;
-                    if (data.timestamp) {
-                        resultDiv.textContent += ` (${data.timestamp})`;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
                     }
-                }
-            })
-            .catch(error => {
-                console.error('Error checking URL:', error);
-                const resultDiv = document.getElementById('urlCheckResult');
-                resultDiv.style.display = 'block';
-                resultDiv.className = 'alert alert-danger';
-                resultDiv.textContent = 'Error checking URL status';
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+
+            // Sticky Header scroll effect
+            const headers = document.querySelectorAll('.section-header');
+            window.addEventListener('scroll', () => {
+                headers.forEach(header => {
+                    const rect = header.getBoundingClientRect();
+                    if (rect.top <= 5) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            });
+
+            // Smooth Scroll for Sidebar
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Update real-time status
+            let statusFailCount = 0;
+            function updateStatus() {
+                fetch('/status')
+                    .then(response => response.json())
+                    .then(data => {
+                        statusFailCount = 0;
+                        if (!data.error) {
+                            document.getElementById('queueSizeValue').textContent = data.queue_size || 0;
+                            document.getElementById('completedUrlsValue').textContent = data.completed ? data.completed.length : 0;
+                            document.getElementById('failedUrlsValue').textContent = data.failed ? data.failed.length : 0;
+                        }
+                    })
+                    .catch(() => {
+                        statusFailCount++;
+                        if (statusFailCount > 5) console.warn("Node status link degraded.");
+                    });
+            }
+            setInterval(updateStatus, 5000);
+            updateStatus();
+
+            // Form Handlers
+            document.getElementById('crawlForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const orig = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>INITIALIZING DATA STREAM...';
+
+                fetch('/start_crawl', { method: 'POST', body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        submitBtn.disabled = false; submitBtn.textContent = orig;
+                        if (data.status === 'success') {
+                            showNotification('Global discovery nodes initialized successfully.', 'success');
+                        } else {
+                            showNotification(data.message, 'danger');
+                        }
+                        updateStatus();
+                    })
+                    .catch(err => {
+                        submitBtn.disabled = false; submitBtn.textContent = orig;
+                        showNotification('Network handshake failed: ' + err.message, 'danger');
+                    });
+            });
+
+            // Search Hub Logic
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const q = document.getElementById('searchInput').value;
+                const f = document.getElementById('fieldSelect').value;
+                if (!q) return;
+
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary mb-3"></div>
+                        <div class="text-muted fw-500">Scanning indexed node partitions...</div>
+                    </div>
+                `;
+
+                const formData = new FormData();
+                formData.append('query', q);
+                formData.append('field', f);
+
+                fetch('/search', { method: 'POST', body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            resultsDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                        } else if (data.length === 0) {
+                            resultsDiv.innerHTML = '<div class="text-center py-5 text-muted h5">No knowledge matches found in current cluster index.</div>';
+                        } else {
+                            let html = `<h5 class="mb-5 text-secondary fw-800" style="letter-spacing: -0.01em;">TOP SEARCH RESULTS (${data.length} MATCHES)</h5>`;
+                            data.forEach((res, i) => {
+                                html += `
+                                <div class="stat-card mb-4 border-0 shadow-sm" style="animation: fadeIn 0.4s ease-out forwards; animation-delay: ${i * 0.1}s;">
+                                    <div class="d-flex justify-content-between align-items-start gap-4">
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1 fw-bold fs-5" style="color: var(--primary-color);">${res.title || 'Untitled Node Data'}</h6>
+                                            <div class="mb-2"><a href="${res.url}" target="_blank" class="text-secondary small text-decoration-none" style="opacity: 0.7; word-break: break-all;">${res.url}</a></div>
+                                            <p class="text-muted small lh-lg" style="max-height: 3.5em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${res.snippet || 'No metadata snippet available for this object.'}</p>
+                                        </div>
+                                        <div class="text-end" style="min-width: 80px;">
+                                            <span class="badge rounded-pill px-3 py-2 bg-light text-primary border" style="font-weight:700;">${res.score.toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center" style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">
+                                        <span>CLUSTER INDEX TIMESTAMP: ${res.timestamp || 'DATA_STALE'}</span>
+                                        <span>REL: HIGH</span>
+                                    </div>
+                                </div>
+                            `;
+                            });
+                            resultsDiv.innerHTML = html;
+                        }
+                    });
+            });
+
+            // Verify Coverage
+            document.getElementById('urlCheckForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const url = document.getElementById('urlInput').value;
+                if (!url) return;
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = '<div class="text-center py-5"><div class="spinner-grow spinner-grow-sm text-secondary me-2"></div> VERIFYING INDEX COVERAGE...</div>';
+                const formData = new FormData();
+                formData.append('url', url);
+                fetch('/check_url', { method: 'POST', body: formData })
+                    .then(response => response.json())
+                    .then(data => {
+                        const color = data.crawled === true ? 'primary' : (data.crawled === 'in_progress' ? 'warning' : 'secondary');
+                        resultsDiv.innerHTML = `
+                        <div class="alert bg-white border-${color} shadow-sm p-4 mt-4" style="border-radius: 16px; border-width: 2px !important; border: solid;">
+                            <h6 class="fw-bold mb-2">Coverage Verification Result</h6>
+                            <p class="mb-0 text-muted">${data.message}</p>
+                            ${data.location ? `<div class="mt-2 small">NODE LOCATION: <span class="badge bg-light text-dark border">${data.location}</span></div>` : ''}
+                        </div>
+                    `;
+                    });
+            });
+
+            // Shutdown/Resume
+            document.getElementById('stopCrawl').addEventListener('click', function () {
+                const btn = this; const orig = btn.textContent; btn.disabled = true; btn.textContent = 'EXECUTING SHUTDOWN...';
+                fetch('/stop_crawl', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        btn.disabled = false; btn.textContent = orig;
+                        showNotification(data.message, 'warning');
+                        updateStatus();
+                    });
+            });
+
+            document.getElementById('retryFailed').addEventListener('click', function () {
+                const btn = this; const orig = btn.textContent; btn.disabled = true; btn.textContent = 'RE-TASKING NODES...';
+                fetch('/retry_failed', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        btn.disabled = false; btn.textContent = orig;
+                        showNotification(data.message, 'success');
+                        updateStatus();
+                    });
+            });
+
+            // Telemetry Streams
+            let lastLogTimestamp = 0;
+            function fetchLogs() {
+                fetch('/get_logs?since=' + lastLogTimestamp)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.logs && data.logs.length > 0) {
+                            const logsContainer = document.getElementById('logsContainer');
+                            if (logsContainer.querySelector('.text-muted')) logsContainer.innerHTML = '';
+                            const activeLogs = document.querySelector('.btn-group .active').id;
+                            data.logs.forEach(log => {
+                                if (log.timestamp > lastLogTimestamp) lastLogTimestamp = log.timestamp;
+                                const logElement = document.createElement('div');
+                                const logTypeClass = log.type.toLowerCase();
+                                logElement.className = `log-entry log-${logTypeClass}`;
+                                let isVisible = true;
+                                if (activeLogs !== 'showAllLogs') {
+                                    const filterType = activeLogs.replace('show', '').replace('Logs', '').toLowerCase();
+                                    if (logTypeClass !== filterType) isVisible = false;
+                                }
+                                if (!isVisible) logElement.style.display = 'none';
+                                logElement.textContent = `[${new Date(log.timestamp * 1000).toLocaleTimeString()}] ${log.message}`;
+                                logsContainer.appendChild(logElement);
+                            });
+                            logsContainer.scrollTop = logsContainer.scrollHeight;
+                        }
+                    });
+            }
+            setInterval(fetchLogs, 2000);
+            fetchLogs();
+
+            // Telemetry Filters
+            ['All', 'Master', 'Crawler', 'Indexer'].forEach(type => {
+                document.getElementById('show' + type + 'Logs').addEventListener('click', function () {
+                    document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    if (type === 'All') {
+                        document.querySelectorAll('.log-entry').forEach(e => e.style.display = '');
+                    } else {
+                        const t = type.toLowerCase();
+                        document.querySelectorAll('.log-entry').forEach(e => {
+                            e.style.display = e.classList.contains('log-' + t) ? '' : 'none';
+                        });
+                    }
+                });
+            });
+
+            // Diagnostic Sequence
+            document.getElementById('debugLogs').addEventListener('click', function () {
+                const logsContainer = document.getElementById('logsContainer');
+                logsContainer.innerHTML = '<div class="p-4 text-warning fw-mono">RUNNING SYSTEM DIAGNOSTICS... ACCESSING NODE PARTITIONS...</div>';
+                fetch('/debug_logs')
+                    .then(response => response.json())
+                    .then(data => {
+                        let html = '<div class="p-4"><h5 class="text-white mb-4">DIAGNOSTIC TRACE COMPLETE</h5>';
+                        html += `<div class="mb-3 text-secondary">OS_PATH: ${data.working_directory}</div>`;
+                        for (const [fn, info] of Object.entries(data.log_files)) {
+                            const statusColor = info.exists ? '#10b981' : '#ef4444';
+                            html += `
+                                <div class="mb-3 p-3" style="background:rgba(255,255,255,0.03); border-radius:12px; border-left: 4px solid ${statusColor}">
+                                    <div class="fw-bold">${fn.toUpperCase()}</div>
+                                    <div class="small text-muted">${info.exists ? 'SYNC_ACTIVE' : 'NODES_UNREACHABLE'} | SIZE: ${info.size} BYTES</div>
+                                </div>
+                            `;
+                        }
+                        html += '</div>';
+                        logsContainer.innerHTML = html;
+                    });
             });
         });
     </script>
 </body>
-</html> 
+
+</html>

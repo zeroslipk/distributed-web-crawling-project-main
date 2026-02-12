@@ -37,7 +37,8 @@ def check_google_credentials():
         # Look for a default location in config directory
         default_cred_path = os.path.abspath("config/distributed_crawler.json")
         if os.path.exists(default_cred_path):
-            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = default_cred_path
+            # Using raw string to avoid escape sequence issues
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = r"{}".format(default_cred_path)
             cred_file = default_cred_path
             print(f"Using credentials file: {cred_file}")
         else:

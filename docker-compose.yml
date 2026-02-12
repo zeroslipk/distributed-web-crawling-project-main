@@ -14,8 +14,6 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/config/distributed_crawler.json
       - COMPONENT_TYPE=master
       - LOCAL_MODE=${LOCAL_MODE:-false}
-    command: >
-      sh -c "python src/run_gcloud_crawler.py master $${LOCAL_MODE:+--local}"
 
   crawler:
     build:
@@ -33,9 +31,9 @@ services:
       - CRAWLER_MAX_PAGES_PER_DOMAIN=25
       - CRAWLER_RESPECT_ROBOTS=true
       - CRAWLER_CRAWL_DELAY=1.0
+      - CRAWLER_TIMEOUT=30
+      - CRAWLER_MAX_RETRIES=3
       - LOCAL_MODE=${LOCAL_MODE:-false}
-    command: >
-      sh -c "python src/run_gcloud_crawler.py crawler $${LOCAL_MODE:+--local}"
 
   indexer:
     build:
@@ -49,6 +47,4 @@ services:
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/config/distributed_crawler.json
       - COMPONENT_TYPE=indexer
-      - LOCAL_MODE=${LOCAL_MODE:-false}
-    command: >
-      sh -c "python src/run_gcloud_crawler.py indexer $${LOCAL_MODE:+--local}" 
+      - LOCAL_MODE=${LOCAL_MODE:-false} 

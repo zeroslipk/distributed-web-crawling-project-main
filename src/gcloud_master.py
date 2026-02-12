@@ -42,6 +42,10 @@ class CrawlState:
         self.config = None
         self.last_save_time = time.time()
         self.in_progress_lock = threading.Lock()
+        self.recently_added = []  # Track recently added URLs
+        self.recently_added_time = time.time()  # When URLs were last added
+        self.failure_reasons = {}  # Track reasons for URL failures
+        self.retry_counters = {}  # Track retry attempts for URLs
 
     def should_crawl_domain(self, domain):
         allowed_domains = self.config.get('allowed_domains')
@@ -197,9 +201,20 @@ class GCPMaster:
             'seen_urls': list(self.state.seen_urls),
             'domain_counts': dict(self.state.domain_counts),
             'timestamp': datetime.now().isoformat(),
-            'is_running': True
+            'is_running': True,
+            'queue': list(self.state.url_queue),
+            'failure_reasons': dict(self.state.failure_reasons)
         }
         
+        # Include recently added URLs in the state
+        if hasattr(self.state, 'recently_added') and self.state.recently_added:
+            # Only keep recently added URLs for 5 minutes
+            if time.time() - self.state.recently_added_time < 300:  # 5 minutes
+                state_data['recently_added'] = self.state.recently_added
+            else:
+                # Clear the list if it's been more than 5 minutes
+                self.state.recently_added = []
+
         # Save based on mode
         if not self.local_mode and self.using_gcp:
             try:
@@ -233,7 +248,8 @@ class GCPMaster:
                 'seen_urls': list(self.state.seen_urls),
                 'domain_counts': dict(self.state.domain_counts),
                 'timestamp': datetime.now().isoformat(),
-                'is_running': True
+                'is_running': True,
+                'failure_reasons': dict(self.state.failure_reasons)
             }
         
         try:
@@ -292,6 +308,7 @@ class GCPMaster:
         self.state.failed = set(state_data.get('failed', []))
         self.state.seen_urls = set(state_data.get('seen_urls', []))
         self.state.domain_counts = defaultdict(int, state_data.get('domain_counts', {}))
+        self.state.failure_reasons = state_data.get('failure_reasons', {})
         
         # Add any in-progress URLs back to the queue if they were being processed
         for url in self.state.in_progress:
@@ -301,13 +318,24 @@ class GCPMaster:
         self.state.in_progress = {}
 
     def add_urls_to_queue(self, urls):
-        """Add URLs to the crawl queue if they haven't been seen yet"""
-        for url in urls:
-            if url not in self.state.seen_urls:
-                self.state.url_queue.append(url)
-                self.state.seen_urls.add(url)
+        """Add URLs to the crawl queue"""
+        for url_item in urls:
+            if isinstance(url_item, tuple):
+                url, depth = url_item
+            else:
+                url, depth = url_item, 0
+                
+            # Only add if it's not already processed or queued
+            if (url not in self.state.seen_urls and 
+                url not in self.state.completed and 
+                url not in self.state.failed):
+                
+                # Check domain policy
                 domain = urlparse(url).netloc
-                logging.debug(f"Added URL to queue: {url}")
+                if self.state.should_crawl_domain(domain) and self.state.can_crawl_domain(domain):
+                    self.state.url_queue.append((url, depth))
+                    self.state.seen_urls.add(url)
+                    self.state.domain_counts[domain] += 1
 
     def send_to_crawler(self, url, depth=0):
         """Send a URL to a crawler for processing"""
@@ -352,52 +380,57 @@ class GCPMaster:
             return False
 
     def process_results(self, message):
-        """Process results from crawlers"""
+        """Process crawl results received from a crawler"""
         try:
+            # Parse message based on source
             if isinstance(message, str):
-                result = json.loads(message)
+                # Message from local file
+                data = json.loads(message)
+                pubsub_message = False
+            elif hasattr(message, 'data'):
+                # Message from subscription callback
+                data = json.loads(message.data.decode('utf-8'))
+                pubsub_message = True
             else:
-                result = message
-                
-            url = result.get('url')
-            links = result.get('links', [])
-            content = result.get('content')
-            success = result.get('success', True)
+                # Message from Pub/Sub pull
+                data = json.loads(message.message.data.decode('utf-8'))
+                pubsub_message = True
             
-            if url in self.state.in_progress:
-                with self.state.in_progress_lock:
+            # Extract data
+            url = data.get('url')
+            success = data.get('success', False)
+            links = data.get('links', [])
+            content = data.get('content')
+            depth = data.get('depth', 0)
+            
+            # Initialize failure reasons dict if not exists
+            if not hasattr(self.state, 'failure_reasons'):
+                self.state.failure_reasons = {}
+            
+            # Store failure reason if failed
+            if not success:
+                error = data.get('error', 'Unknown error')
+                self.state.failure_reasons[url] = error
+            
+            # Update state
+            with self.state.in_progress_lock:
+                if url in self.state.in_progress:
+                    # Remove from in-progress
                     del self.state.in_progress[url]
-                
-                if success:
-                    # Update domain count
-                    domain = urlparse(url).netloc
-                    self.state.domain_counts[domain] += 1
                     
-                    # Add URL to completed set
-                    self.state.completed.add(url)
-                    
-                    # Process links from this page
-                    depth = result.get('depth', 0) + 1
-                    if depth <= self.state.config['max_depth']:
-                        new_links = []
-                        for link in links:
-                            link_domain = urlparse(link).netloc
-                            if (link not in self.state.seen_urls and 
-                                self.state.should_crawl_domain(link_domain) and 
-                                self.state.can_crawl_domain(link_domain)):
-                                new_links.append(link)
-                                self.state.seen_urls.add(link)
+                    # Add to appropriate set based on success
+                    if success:
+                        self.state.completed.add(url)
                         
-                        # Add the new URLs to the queue
-                        for link in new_links:
-                            self.state.url_queue.append((link, depth))
-                    
-                    # Send content to indexer if available
-                    if content:
-                        self.send_to_indexer(url, content)
-                else:
-                    # Add URL to failed set
-                    self.state.failed.add(url)
+                        # Add links to queue if within depth limit
+                        if depth < self.config.get('max_depth', 3):
+                            self.add_urls_to_queue([(link, depth + 1) for link in links])
+                        
+                        # Send to indexer if content is available
+                        if content and (url not in self.state.failed or url in self.state.in_progress):
+                            self.send_to_indexer(url, content)
+                    else:
+                        self.state.failed.add(url)
             
             # Save state if it's been a while
             if time.time() - self.state.last_save_time > 60:  # Save every minute
@@ -471,14 +504,31 @@ class GCPMaster:
                 if current_time - start_time > timeout_seconds:
                     timed_out_urls.append(url)
                     del self.state.in_progress[url]
-                    self.state.failed.add(url)
-                    logging.warning(f"URL timed out: {url}")
+                    
+                    # Check and update retry counter
+                    if not hasattr(self.state, 'retry_counters'):
+                        self.state.retry_counters = {}
+                    
+                    retry_count = self.state.retry_counters.get(url, 0) + 1
+                    self.state.retry_counters[url] = retry_count
+                    
+                    # If we've retried too many times, mark as permanently failed
+                    max_retries = 3
+                    if retry_count > max_retries:
+                        self.state.failed.add(url)
+                        logging.warning(f"URL timed out and permanently failed after {retry_count} retries: {url}")
+                    else:
+                        self.state.failed.add(url)
+                        logging.warning(f"URL timed out (attempt {retry_count}/{max_retries}): {url}")
         
-        # Re-queue timed out URLs with backoff?
+        # Re-queue timed out URLs that haven't exceeded retry limit
         for url in timed_out_urls:
             if url not in self.state.url_queue and url not in self.state.completed:
-                self.state.url_queue.append(url)
-                logging.info(f"Re-queued timed out URL: {url}")
+                # Only re-queue if under retry limit
+                retry_count = self.state.retry_counters.get(url, 0)
+                if retry_count <= 3:  # max_retries
+                    self.state.url_queue.append(url)
+                    logging.info(f"Re-queued timed out URL: {url} (attempt {retry_count}/3)")
 
     def initialize_crawl(self):
         """Initialize the crawling process with seed URLs"""
@@ -488,6 +538,83 @@ class GCPMaster:
             logging.info(f"Initialized crawl with {len(seed_urls)} seed URLs")
         else:
             logging.warning("No seed URLs provided in config")
+
+    def check_for_config_updates(self):
+        """Check for config updates and add any new seed URLs to the queue"""
+        try:
+            new_config = None
+            config_updated = False
+            
+            # Try to load from local file first (this is the most common update path from the web UI)
+            try:
+                with open('config/crawl_config.json', 'r') as f:
+                    new_config = json.load(f)
+                    config_updated = True
+            except Exception as local_e:
+                logging.debug(f"No local config update found: {local_e}")
+            
+            # Check Cloud Storage if in GCP mode
+            if not self.local_mode and self.using_gcp and not config_updated:
+                try:
+                    bucket = self.storage_client.bucket(self.bucket_name)
+                    blob = bucket.blob('config/crawler_config.json')
+                    
+                    if blob.exists():
+                        config_json = blob.download_as_string()
+                        new_config = json.loads(config_json)
+                        config_updated = True
+                except Exception as gcp_e:
+                    logging.error(f"Error checking GCP config: {gcp_e}")
+            
+            # If config was updated, compare seed URLs and add new ones
+            if config_updated and new_config:
+                current_seed_urls = set(self.config.get('seed_urls', []))
+                new_seed_urls = set(new_config.get('seed_urls', []))
+                
+                # Find URLs that are in the new config but not in current config
+                added_urls = new_seed_urls - current_seed_urls
+                
+                if added_urls:
+                    logging.info(f"Found {len(added_urls)} new seed URLs in updated config")
+                    
+                    # Add new URLs to queue if they haven't been processed
+                    new_urls_added = []
+                    for url in added_urls:
+                        if (url not in self.state.seen_urls and 
+                            url not in self.state.completed and 
+                            url not in self.state.failed):
+                            self.state.url_queue.append((url, 0))  # Start at depth 0
+                            self.state.seen_urls.add(url)
+                            new_urls_added.append(url)
+                            
+                            # Update domain counters for URL
+                            domain = urlparse(url).netloc
+                            if domain and self.state.should_crawl_domain(domain):
+                                logging.info(f"Added new seed URL to queue: {url}")
+                    
+                    if new_urls_added:
+                        logging.info(f"Added {len(new_urls_added)} new URLs to crawl queue")
+                        # Track newly added URLs for display in UI
+                        self.state.recently_added = new_urls_added
+                        self.state.recently_added_time = time.time()
+                        # Update our config with the new one
+                        self.config = new_config
+                
+                # Check for other config changes
+                for key in ['max_depth', 'max_pages_per_domain', 'respect_robots', 'crawl_delay', 'allowed_domains']:
+                    if self.config.get(key) != new_config.get(key):
+                        logging.info(f"Updated configuration parameter: {key}")
+                        self.config = new_config
+                        break
+                
+                # Make sure state has updated config
+                self.state.config = self.config
+                
+                return len(added_urls) > 0
+        except Exception as e:
+            logging.error(f"Error checking for config updates: {e}")
+        
+        return False
 
     def run(self):
         """Main crawling loop"""
@@ -500,6 +627,7 @@ class GCPMaster:
         
         logging.info("Starting crawl process")
         self.state.last_save_time = time.time()
+        last_config_check_time = time.time()
         
         # Set up heartbeat thread if using GCP
         if not self.local_mode and self.using_gcp:
@@ -516,6 +644,12 @@ class GCPMaster:
                 # In local mode, check for results from files
                 if self.local_mode or not self.using_gcp:
                     self.check_local_results()
+                
+                # Periodically check for config updates (every 30 seconds)
+                current_time = time.time()
+                if current_time - last_config_check_time > 30:
+                    self.check_for_config_updates()
+                    last_config_check_time = current_time
                 
                 # Process URLs from queue
                 if self.state.url_queue:
@@ -538,7 +672,20 @@ class GCPMaster:
                 if current_time - self.state.last_save_time > 60:  # Save every minute
                     self.save_state_to_storage()
                     self.state.last_save_time = current_time
-                    logging.info(f"Stats: Queue={len(self.state.url_queue)}, In Progress={len(self.state.in_progress)}, Completed={len(self.state.completed)}, Failed={len(self.state.failed)}")
+                    
+                    # Analyze failure reasons if there are failed URLs
+                    failure_counts = {}
+                    if hasattr(self.state, 'failure_reasons'):
+                        for reason in self.state.failure_reasons.values():
+                            if reason in failure_counts:
+                                failure_counts[reason] += 1
+                            else:
+                                failure_counts[reason] = 1
+                        
+                        failure_summary = ", ".join([f"{count} {reason}" for reason, count in failure_counts.items()])
+                        logging.info(f"Stats: Queue={len(self.state.url_queue)}, In Progress={len(self.state.in_progress)}, Completed={len(self.state.completed)}, Failed={len(self.state.failed)}/{failure_summary if failure_summary else ''}")
+                    else:
+                        logging.info(f"Stats: Queue={len(self.state.url_queue)}, In Progress={len(self.state.in_progress)}, Completed={len(self.state.completed)}, Failed={len(self.state.failed)}")
             
             # Final state save
             self.save_state_to_storage()

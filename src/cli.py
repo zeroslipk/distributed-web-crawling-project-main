@@ -8,6 +8,7 @@ import logging
 import time
 from urllib.parse import urlparse
 import re
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.INFO,
@@ -87,63 +88,147 @@ def start_crawl(args):
     with open('config/crawl_config.json', 'w') as f:
         json.dump(config, f, indent=2)
 
-    # Start the crawl using mpiexec
-    num_nodes = args.nodes if args.nodes else 3  # Default to 3 nodes (1 master, 1 crawler, 1 indexer)
-    cmd = f"mpiexec -n {num_nodes} python src/run_crawler.py"
+    # Start the crawl using run_gcloud_crawler.py
+    num_nodes = args.nodes if args.nodes else 3
+    # Note: run_gcloud_crawler.py 'all' handles master, crawler, and indexer
+    cmd = f"python src/run_gcloud_crawler.py all --local"
     logging.info(f"Starting crawl with command: {cmd}")
     os.system(cmd)
 
 def show_status(args):
     """Show current crawl status"""
     try:
-        with open('crawl_state.json', 'r') as f:
+        state_file = 'data/state/current_state.json'
+        if not os.path.exists(state_file):
+            logging.error(f"No crawl state found at {state_file}. Has a crawl been started?")
+            return
+
+        with open(state_file, 'r') as f:
             state = json.load(f)
         
         print("\nCrawl Status:")
         print("-" * 50)
-        print(f"Queue Size: {len(state['queue'])}")
-        print(f"Completed URLs: {len(state['completed'])}")
-        print(f"Failed URLs: {len(state['failed'])}")
-        print(f"Total Unique URLs Seen: {len(state['seen_urls'])}")
-        print(f"Domains Crawled: {len(state['domain_counts'])}")
-        print(f"Last Updated: {state['timestamp']}")
+        queue_size = len(state.get('queue', []))
+        completed_size = len(state.get('completed', []))
+        failed_size = len(state.get('failed', []))
+        seen_size = len(state.get('seen_urls', []))
+        
+        print(f"Queue Size: {queue_size}")
+        print(f"Completed URLs: {completed_size}")
+        print(f"Failed URLs: {failed_size}")
+        print(f"Total Unique URLs Seen: {seen_size}")
+        print(f"Domains Crawled: {len(state.get('domain_counts', {}))}")
+        print(f"Last Updated: {state.get('timestamp', 'Unknown')}")
         print("-" * 50)
-    except FileNotFoundError:
-        logging.error("No crawl state found. Has a crawl been started?")
     except Exception as e:
         logging.error(f"Error reading crawl state: {e}")
 
 def search_index(args):
-    """Search the index for the given query"""
-    comm = MPI.COMM_WORLD
-    rank = comm.Get_rank()
-    size = comm.Get_size()
-
-    if size < 2:
-        logging.error("Need at least one indexer node to search")
+    """Search the index for the given query (Local Implementation)"""
+    index_file = 'data/index/latest_index.json'
+    if not os.path.exists(index_file):
+        logging.error(f"Index file not found at {index_file}. Crawl some pages first.")
         return
 
-    # Send search query to first indexer node
-    indexer_rank = size - 1  # Last node is indexer
-    query_msg = {
-        'query': args.query,
-        'field': args.field,
-        'limit': args.limit
-    }
-    
     try:
-        comm.send(query_msg, dest=indexer_rank, tag=3)  # Tag 3 for search queries
-        results = comm.recv(source=indexer_rank, tag=4)  # Tag 4 for search results
+        with open(index_file, 'r') as f:
+            index_data = json.load(f)
         
-        print("\nSearch Results:")
+        # Simple local search logic
+        query_terms = re.findall(r'\w+', args.query.lower())
+        if not query_terms:
+            print("Empty query.")
+            return
+
+        scores = {} # url -> score
+        url_metadata = {} # url -> {title, timestamp}
+
+        content_index = index_data.get('content_index', {})
+        
+        for term in query_terms:
+            if term in content_index:
+                # content_index[term] is a list of [url, score, title, timestamp]
+                for entry in content_index[term]:
+                    url = entry[0]
+                    score = entry[1]
+                    title = entry[2]
+                    timestamp = entry[3]
+                    
+                    scores[url] = scores.get(url, 0.0) + score
+                    url_metadata[url] = {'title': title, 'timestamp': timestamp}
+
+        # Filter by field if specified (very basic filter)
+        results = []
+        for url, score in scores.items():
+            meta = url_metadata[url]
+            if args.field == 'title' and not any(t in meta['title'].lower() for t in query_terms):
+                continue
+            if args.field == 'url' and not any(t in url.lower() for t in query_terms):
+                continue
+            
+            results.append({
+                'url': url,
+                'score': score,
+                'title': meta['title'],
+                'timestamp': meta['timestamp']
+            })
+
+        results.sort(key=lambda x: x['score'], reverse=True)
+        top_results = results[:args.limit]
+
+        print(f"\nSearch Results for '{args.query}':")
         print("-" * 50)
-        for i, result in enumerate(results, 1):
-            print(f"\n{i}. {result['title']}")
-            print(f"URL: {result['url']}")
-            print(f"Score: {result['score']:.2f}")
-            print(f"Indexed: {result['timestamp']}")
+        if not top_results:
+            print("No matches found.")
+        else:
+            for i, result in enumerate(top_results, 1):
+                print(f"\n{i}. {result['title']}")
+                print(f"URL: {result['url']}")
+                print(f"Score: {result['score']:.2f}")
+                print(f"Indexed: {result['timestamp']}")
+        print("-" * 50)
+
     except Exception as e:
-        logging.error(f"Error performing search: {e}")
+        logging.error(f"Error performing local search: {e}")
+
+def reset_failures(args):
+    """Reset failed URLs or problematic domains"""
+    if args.clear_problematic_domains:
+        # Create a flag file for the crawler to clear problematic domains
+        with open('clear_problematic_domains.flag', 'w') as f:
+            f.write(f"Clear request at {datetime.now().isoformat()}")
+        print("Flag created to clear problematic domains. Will be processed on next crawler run.")
+    
+    if args.reset_failed_urls:
+        # Load state file
+        state_file = 'data/state/current_state.json'
+        if not os.path.exists(state_file):
+            print("No state file found. Cannot reset failed URLs.")
+            return
+        
+        try:
+            with open(state_file, 'r') as f:
+                state = json.load(f)
+            
+            # Move failed URLs back to queue
+            failed_urls = state.get('failed', [])
+            queue = state.get('queue', [])
+            
+            # Add failed URLs to queue if not already there
+            for url in failed_urls:
+                if url not in queue:
+                    queue.append(url)
+            
+            # Clear failed URLs
+            state['failed'] = []
+            
+            # Save updated state
+            with open(state_file, 'w') as f:
+                json.dump(state, f, indent=2)
+            
+            print(f"Reset {len(failed_urls)} failed URLs back to the queue.")
+        except Exception as e:
+            print(f"Error resetting failed URLs: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description='Distributed Web Crawler CLI')
@@ -170,6 +255,12 @@ def main():
                              help='Field to search in')
     search_parser.add_argument('--limit', type=int, default=10, help='Maximum number of results')
 
+    # Reset failed URLs command
+    reset_parser = subparsers.add_parser('reset-failures', help='Reset failed URLs or problematic domains')
+    reset_parser.add_argument('--clear-problematic-domains', action='store_true', help='Clear the list of problematic domains')
+    reset_parser.add_argument('--reset-failed-urls', action='store_true', help='Reset all failed URLs back to the queue')
+    reset_parser.set_defaults(func=reset_failures)
+
     args = parser.parse_args()
 
     if args.command == 'start':
@@ -178,6 +269,8 @@ def main():
         show_status(args)
     elif args.command == 'search':
         search_index(args)
+    elif args.command == 'reset-failures':
+        reset_failures(args)
     else:
         parser.print_help()
 

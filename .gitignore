@@ -1,0 +1,29 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Data and Crawl Results (Huge folders)
+data/
+logs/
+*.log
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Config sensitive files
+config/distributed_crawler.json
+config/crawl_config.json
+crawler.lock

@@ -451,6 +451,10 @@ class GCPIndexer:
             
             logging.info(f"Indexing content for URL: {url}")
             
+            # Ensure content has the url field - this is the fix for the KeyError: 'url'
+            if isinstance(content, dict) and 'url' not in content:
+                content['url'] = url
+            
             # Index the document
             self.index.index_document(content)
             

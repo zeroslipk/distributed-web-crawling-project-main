@@ -13,6 +13,8 @@ from datetime import datetime
 import uuid
 import signal
 import threading
+from bs4 import BeautifulSoup
+import random
 
 # Configure logging
 logging.basicConfig(
@@ -91,6 +93,9 @@ class GCPCrawler:
         self.robots = RobotsCache()
         self.last_crawl_time = defaultdict(float)
         self.headers = {'User-Agent': f'GCPCrawlBot/1.0 ({self.worker_id})'}
+        
+        # Track problematic domains to avoid repeatedly retrying them
+        self.problematic_domains = set()
         
         # Subscriber client for pulling messages
         if self.gcp_available:
@@ -181,6 +186,8 @@ class GCPCrawler:
             config['max_pages_per_domain'] = int(os.environ.get('CRAWLER_MAX_PAGES_PER_DOMAIN', 25))
             config['respect_robots'] = os.environ.get('CRAWLER_RESPECT_ROBOTS', 'true').lower() == 'true'
             config['crawl_delay'] = float(os.environ.get('CRAWLER_CRAWL_DELAY', 1.0))
+            config['timeout'] = int(os.environ.get('CRAWLER_TIMEOUT', 60))
+            config['max_retries'] = int(os.environ.get('CRAWLER_MAX_RETRIES', 5))
             
             allowed_domains = os.environ.get('CRAWLER_ALLOWED_DOMAINS', '')
             if allowed_domains:
@@ -200,13 +207,18 @@ class GCPCrawler:
             'max_pages_per_domain': 25,
             'respect_robots': True,
             'crawl_delay': 1.0,
-            'allowed_domains': []
+            'allowed_domains': [],
+            'timeout': 60,
+            'max_retries': 5
         }
 
     async def init_session(self):
         """Initialize HTTP session"""
         if not self.session:
-            self.session = aiohttp.ClientSession(headers=self.headers)
+            # Create a connector that allows SSL certificate issues
+            connector = aiohttp.TCPConnector(ssl=False)
+            self.session = aiohttp.ClientSession(headers=self.headers, connector=connector)
+            logging.info("Created HTTP session with SSL verification disabled for compatibility")
 
     async def close_session(self):
         """Close HTTP session"""
@@ -224,58 +236,283 @@ class GCPCrawler:
         self.last_crawl_time[domain] = time.time()
 
     async def crawl_url(self, url, depth=0):
-        """Crawl a single URL and return extracted links and content"""
+        """Crawl a given URL and extract content and links"""
         domain = urlparse(url).netloc
         
-        # Respect robots.txt and crawl delay
-        if self.config.get('respect_robots', True) and not self.robots.can_fetch(url):
-            logging.info(f"Skipping URL due to robots.txt: {url}")
-            return False, [], None
+        # Check if this is a known problematic domain
+        if domain in self.problematic_domains:
+            logging.warning(f"Skipping known problematic domain: {domain}")
+            return {
+                'url': url,
+                'depth': depth,
+                'success': False,
+                'error': 'Known problematic domain',
+                'links': [],
+                'content': None,
+                'timestamp': datetime.now().isoformat()
+            }
         
-        # Respect crawl delay
+        # Respect crawl delay for robots.txt
         self.respect_delay(domain)
         
-        # Initialize session if needed
-        await self.init_session()
-        
         try:
+            # Log crawl attempt
             logging.info(f"Crawling URL: {url}")
             
-            # Request the URL
-            async with self.session.get(url, timeout=30) as response:
-                if response.status != 200:
-                    logging.warning(f"Failed to fetch URL: {url}, status: {response.status}")
-                    return False, [], None
-                
-                # Get content type
-                content_type = response.headers.get('Content-Type', '')
-                if not content_type.startswith('text/html'):
-                    logging.info(f"Skipping non-HTML content: {url}, type: {content_type}")
-                    return True, [], None
-                
-                # Get HTML content
-                html = await response.text()
-                
-                # Extract links
-                links = self.extract_links(url, html)
-                
-                # Extract relevant content
-                content = self.extract_content(url, html)
-                
-                # Save HTML content
-                self.save_html_content(url, html)
-                
-                # Update last crawl time
-                self.last_crawl_time[domain] = time.time()
-                
-                return True, links, content
-                
-        except asyncio.TimeoutError:
-            logging.warning(f"Timeout while crawling URL: {url}")
+            # Get timeout from config
+            timeout = self.config.get('timeout', 60)
+            max_retries = self.config.get('max_retries', 5)
+
+            # Use aiohttp for HTTP requests
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Cache-Control': 'max-age=0',
+            }
+            
+            # Enhanced exponential backoff retry logic
+            retry_delay = 2
+            
+            for retry in range(max_retries):
+                try:
+                    async with self.session.get(url, headers=headers, timeout=timeout, allow_redirects=True) as response:
+                        # Check if the response was successful
+                        if response.status == 200:
+                            # Get content type
+                            content_type = response.headers.get('Content-Type', '').lower()
+                            
+                            # Only process HTML content
+                            if 'text/html' in content_type:
+                                # Get HTML content
+                                html_content = await response.text()
+                                
+                                # Parse HTML
+                                soup = BeautifulSoup(html_content, 'html.parser')
+                                
+                                # Extract links
+                                links = []
+                                for link in soup.find_all('a', href=True):
+                                    href = link['href'].strip()
+                                    if not href:
+                                        continue
+                                        
+                                    # Skip javascript links and anchors
+                                    if href.startswith(('javascript:', '#', 'mailto:', 'tel:')):
+                                        continue
+                                        
+                                    # Convert relative URLs to absolute
+                                    absolute_url = urljoin(url, href)
+                                    
+                                    # Remove fragments
+                                    absolute_url = absolute_url.split('#')[0]
+                                    
+                                    # Ensure URL has proper format
+                                    if absolute_url.startswith(('http://', 'https://')):
+                                        links.append(absolute_url)
+                                
+                                # Extract text content
+                                text_content = soup.get_text(separator=' ', strip=True)
+                                
+                                # Extract title
+                                title = soup.title.string if soup.title else url
+                                
+                                # Return successful result
+                                return {
+                                    'url': url,
+                                    'title': title,
+                                    'links': links,
+                                    'content': text_content,
+                                    'html': html_content,
+                                    'depth': depth,
+                                    'success': True,
+                                    'timestamp': datetime.now().isoformat()
+                                }
+                            else:
+                                # Non-HTML content
+                                logging.info(f"Skipping non-HTML content for {url}: {content_type}")
+                                return {
+                                    'url': url,
+                                    'depth': depth,
+                                    'success': True,  # Mark as success to avoid re-crawling
+                                    'content_type': content_type,
+                                    'links': [],
+                                    'content': None,
+                                    'timestamp': datetime.now().isoformat()
+                                }
+                        elif response.status in [301, 302, 303, 307, 308]:
+                            # Handle redirects manually if needed
+                            redirect_url = response.headers.get('Location')
+                            if redirect_url:
+                                logging.info(f"Redirect from {url} to {redirect_url}")
+                                # Follow the redirect (up to a limit)
+                                if retry < 3:  # Allow a few redirects
+                                    url = urljoin(url, redirect_url)
+                                    continue
+                                else:
+                                    return {
+                                        'url': url,
+                                        'depth': depth,
+                                        'success': False,
+                                        'error': f'Too many redirects',
+                                        'links': [],
+                                        'content': None,
+                                        'timestamp': datetime.now().isoformat()
+                                    }
+                        elif response.status == 429:
+                            # Too Many Requests - retry with exponential backoff
+                            wait_time = retry_delay * (2 ** retry) + random.uniform(1, 5)  # Add jitter
+                            logging.warning(f"Rate limited (429) for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries})")
+                            await asyncio.sleep(wait_time)
+                            continue
+                        elif response.status >= 500:
+                            # Server error - retry with exponential backoff
+                            if retry < max_retries - 1:
+                                wait_time = retry_delay * (2 ** retry)
+                                logging.warning(f"Server error {response.status} for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries})")
+                                await asyncio.sleep(wait_time)
+                                continue
+                            else:
+                                logging.warning(f"Server error {response.status} for {url} after {max_retries} attempts")
+                                return {
+                                    'url': url,
+                                    'depth': depth,
+                                    'success': False,
+                                    'error': f'HTTP status {response.status} (server error)',
+                                    'http_status': response.status,
+                                    'links': [],
+                                    'content': None,
+                                    'timestamp': datetime.now().isoformat()
+                                }
+                        else:
+                            # Other HTTP error
+                            logging.warning(f"HTTP error for {url}: {response.status}")
+                            return {
+                                'url': url,
+                                'depth': depth,
+                                'success': False,
+                                'error': f'HTTP status {response.status}',
+                                'http_status': response.status,
+                                'links': [],
+                                'content': None,
+                                'timestamp': datetime.now().isoformat()
+                            }
+                    # If we got here, the request was successful
+                    break
+                except asyncio.TimeoutError:
+                    if retry < max_retries - 1:
+                        # Try again with exponential backoff
+                        wait_time = retry_delay * (2 ** retry)
+                        logging.warning(f"Timeout for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries})")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        # Final timeout, report failure
+                        logging.warning(f"Timeout while crawling URL: {url} after {max_retries} attempts")
+                        return {
+                            'url': url,
+                            'depth': depth,
+                            'success': False,
+                            'error': 'Request timeout',
+                            'error_detail': f'Timeout after {max_retries} attempts with {timeout}s timeout each',
+                            'links': [],
+                            'content': None,
+                            'timestamp': datetime.now().isoformat()
+                        }
+                except aiohttp.ClientConnectorError as e:
+                    # Connection error (DNS failure, refused connection, etc)
+                    if retry < max_retries - 1:
+                        wait_time = retry_delay * (2 ** retry)
+                        logging.warning(f"Connection error for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries}): {e}")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        logging.warning(f"Connection error for {url} after {max_retries} attempts: {e}")
+                        # Add domain to problematic domains list after multiple connection failures
+                        self.problematic_domains.add(domain)
+                        logging.warning(f"Added {domain} to problematic domains list")
+                        return {
+                            'url': url,
+                            'depth': depth,
+                            'success': False,
+                            'error': f'Connection error: {str(e)}',
+                            'links': [],
+                            'content': None,
+                            'timestamp': datetime.now().isoformat()
+                        }
+                except aiohttp.ClientSSLError as e:
+                    # SSL certificate errors
+                    if retry < max_retries - 1:
+                        wait_time = retry_delay * (2 ** retry)
+                        logging.warning(f"SSL error for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries}): {e}")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        logging.warning(f"SSL error for {url} after {max_retries} attempts: {e}")
+                        # Add domain to problematic domains list
+                        self.problematic_domains.add(domain)
+                        logging.warning(f"Added {domain} to problematic domains list due to SSL errors")
+                        return {
+                            'url': url,
+                            'depth': depth,
+                            'success': False,
+                            'error': f'SSL error: {str(e)}',
+                            'links': [],
+                            'content': None,
+                            'timestamp': datetime.now().isoformat()
+                        }
+                except aiohttp.ClientError as e:
+                    # Other client errors
+                    if retry < max_retries - 1:
+                        wait_time = retry_delay * (2 ** retry)
+                        logging.warning(f"Client error for {url}, retrying in {wait_time} seconds (attempt {retry+1}/{max_retries}): {e}")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        logging.warning(f"Client error for {url} after {max_retries} attempts: {e}")
+                        # Add domain to problematic domains list after multiple client errors
+                        self.problematic_domains.add(domain)
+                        logging.warning(f"Added {domain} to problematic domains list")
+                        return {
+                            'url': url,
+                            'depth': depth,
+                            'success': False,
+                            'error': f'Client error: {str(e)}',
+                            'links': [],
+                            'content': None,
+                            'timestamp': datetime.now().isoformat()
+                        }
+                except Exception as e:
+                    # Other unexpected errors - attempt retry for some common issues
+                    if retry < max_retries - 1 and any(err in str(e).lower() for err in ['timeout', 'reset', 'refused', 'connection', 'temporary']):
+                        wait_time = retry_delay * (2 ** retry)
+                        logging.warning(f"Error during retry {retry+1} for {url}, will retry in {wait_time} seconds: {str(e)}")
+                        await asyncio.sleep(wait_time)
+                    else:
+                        # Break the retry loop on other errors
+                        logging.error(f"Error during retry {retry+1} for {url}: {str(e)}")
+                        break
+            
+            # All retries failed with an unknown error
+            return {
+                'url': url,
+                'depth': depth,
+                'success': False,
+                'error': 'Failed after multiple retries',
+                'links': [],
+                'content': None,
+                'timestamp': datetime.now().isoformat()
+            }
         except Exception as e:
-            logging.error(f"Error crawling URL: {url}, error: {e}")
-        
-        return False, [], None
+            # Catch any unexpected exceptions outside the retry loop
+            logging.error(f"Unexpected error crawling URL {url}: {str(e)}")
+            return {
+                'url': url,
+                'depth': depth,
+                'success': False,
+                'error': str(e),
+                'links': [],
+                'content': None,
+                'timestamp': datetime.now().isoformat()
+            }
 
     def extract_links(self, base_url, html):
         """Extract links from HTML"""
@@ -352,8 +589,95 @@ class GCPCrawler:
             clean_url = clean_url[:160] + '_' + hash_suffix
         return clean_url
 
-    def send_result(self, url, links, content, success=True, depth=0):
+    async def process_message(self, message):
+        """Process a crawl request message"""
+        try:
+            if isinstance(message, str):
+                # Message from local file
+                data = json.loads(message)
+                pubsub_message = False
+            elif hasattr(message, 'data'):
+                # Message directly from Pub/Sub client
+                data = json.loads(message.data.decode('utf-8'))
+                pubsub_message = True
+            else:
+                # Message from Pub/Sub pull response
+                data = json.loads(message.message.data.decode('utf-8'))
+                pubsub_message = True
+            
+            url = data.get('url')
+            depth = data.get('depth', 0)
+            
+            if not url:
+                logging.warning("Received message without URL")
+                return
+            
+            # Fix URLs missing protocol
+            if not url.startswith(('http://', 'https://')):
+                original_url = url
+                url = 'https://' + url
+                logging.info(f"Added https:// protocol to URL: {original_url} -> {url}")
+            
+            # Crawl the URL
+            result = await self.crawl_url(url, depth)
+            
+            # Ensure result has all required fields
+            if result is None:
+                result = {
+                    'url': url,
+                    'depth': depth,
+                    'success': False,
+                    'error': 'Unknown error',
+                    'links': [],
+                    'content': None,
+                    'timestamp': datetime.now().isoformat()
+                }
+            
+            # Ensure result has links even if null
+            if 'links' not in result:
+                result['links'] = []
+            
+            # Ensure result has content even if null
+            if 'content' not in result:
+                result['content'] = None
+            
+            # Send result back to master
+            self.send_result(
+                url, 
+                result.get('links', []), 
+                result.get('content'), 
+                result.get('success', False), 
+                depth, 
+                result.get('error'), 
+                result.get('error_detail')
+            )
+            
+            logging.info(f"Processed URL: {url}, success: {result.get('success', False)}, links: {len(result.get('links', [])) if result.get('links') else 0}")
+            
+        except Exception as e:
+            logging.error(f"Error processing message: {e}")
+            # Try to send a failure result if we have a URL
+            if 'url' in locals():
+                try:
+                    self.send_result(
+                        url, 
+                        [], 
+                        None, 
+                        False, 
+                        depth if 'depth' in locals() else 0, 
+                        "Error processing message", 
+                        str(e)
+                    )
+                    logging.info(f"Sent failure result for {url}")
+                except Exception as e2:
+                    logging.error(f"Error sending failure result: {e2}")
+
+    def send_result(self, url, links, content, success=True, depth=0, error=None, error_detail=None):
         """Send crawl result back to the master"""
+        # Ensure links is a list
+        if links is None:
+            links = []
+        
         result = {
             'url': url,
             'links': links,
@@ -362,18 +686,24 @@ class GCPCrawler:
             'depth': depth
         }
         
+        # Add error information if provided
+        if error:
+            result['error'] = error
+        
+        if error_detail:
+            result['error_detail'] = error_detail
+        
         # Only include content if it was extracted successfully
         if content:
             result['content'] = content
         
         if self.gcp_available:
             try:
-                # Send to Pub/Sub
+                # Send to Pub/Sub - use only data with no additional attributes
                 message_json = json.dumps(result).encode('utf-8')
                 future = self.publisher.publish(
                     self.results_topic_name, 
-                    data=message_json,
-                    url=url
+                    data=message_json
                 )
                 message_id = future.result()
                 logging.debug(f"Sent result to Pub/Sub: {url} (ID: {message_id})")
@@ -418,17 +748,17 @@ class GCPCrawler:
             return False
             
         try:
-            message = json.dumps({
+            message_data = {
                 'worker_id': self.worker_id,
                 'component': 'crawler',
                 'timestamp': datetime.now().isoformat(),
                 'status': 'running'
-            }).encode('utf-8')
+            }
             
+            # Publish message with data only, no additional attributes
             future = self.publisher.publish(
                 self.heartbeat_topic_name, 
-                data=message,
-                worker_id=self.worker_id
+                data=json.dumps(message_data).encode('utf-8')
             )
             future.result()
             logging.debug("Sent heartbeat")
@@ -437,48 +767,29 @@ class GCPCrawler:
             logging.error(f"Failed to send heartbeat: {e}")
             return False
 
-    async def process_message(self, message):
-        """Process a crawl request message"""
-        try:
-            if isinstance(message, str):
-                # Message from local file
-                data = json.loads(message)
-            else:
-                # Message from Pub/Sub
-                data = json.loads(message.data.decode('utf-8'))
-            
-            url = data.get('url')
-            depth = data.get('depth', 0)
-            
-            if not url:
-                logging.warning("Received message without URL")
-                if not isinstance(message, str):
-                    message.ack()
-                return
-            
-            # Crawl the URL
-            success, links, content = await self.crawl_url(url, depth)
-            
-            # Send result back to master
-            self.send_result(url, links, content, success, depth)
-            
-            # Acknowledge the message if from Pub/Sub
-            if not isinstance(message, str):
-                message.ack()
-                
-            logging.info(f"Processed URL: {url}, success: {success}, links: {len(links) if links else 0}")
-            
-        except Exception as e:
-            logging.error(f"Error processing message: {e}")
-            # Don't ack the message to allow retry if it's from Pub/Sub
-            if not isinstance(message, str):
-                try:
-                    message.nack()
-                except:
-                    pass
-
     def check_local_tasks(self):
         """Check for crawl tasks in the local file system"""
+        # First check if there's a flag to clear problematic domains
+        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        reset_flag_path = os.path.join(root_dir, 'clear_problematic_domains.flag')
+        
+        if os.path.exists(reset_flag_path):
+            try:
+                # Read the flag file to log the reset request
+                with open(reset_flag_path, 'r') as f:
+                    reset_info = f.read().strip()
+                
+                # Clear the problematic domains set
+                domain_count = len(self.problematic_domains)
+                self.problematic_domains.clear()
+                logging.info(f"Cleared {domain_count} problematic domains from cache. Reset request: {reset_info}")
+                
+                # Delete the flag file
+                os.remove(reset_flag_path)
+            except Exception as e:
+                logging.error(f"Error processing problematic domains reset flag: {e}")
+        
+        # Continue with normal task checking
         task_dir = 'data/urls/to_crawl'
         if not os.path.exists(task_dir):
             return None
@@ -520,8 +831,8 @@ class GCPCrawler:
             # Process URLs with asyncio
             async def process_urls():
                 for url in urls:
-                    success, links, content = await self.crawl_url(url)
-                    self.send_result(url, links, content, success)
+                    result = await self.crawl_url(url)
+                    self.send_result(url, result['links'], result['content'], result['success'], result['depth'], result.get('error'), result.get('error_detail'))
             
             # Run the async function
             loop = asyncio.get_event_loop()
@@ -544,16 +855,27 @@ class GCPCrawler:
             while self.running:
                 # If in GCP mode, pull from Pub/Sub
                 if self.gcp_available:
-                    response = self.subscriber.pull(
-                        request={
-                            "subscription": self.subscription_name,
-                            "max_messages": 5,
-                        }
-                    )
-                    
-                    if response.received_messages:
-                        for received_message in response.received_messages:
-                            await self.process_message(received_message.message)
+                    try:
+                        response = self.subscriber.pull(
+                            request={
+                                "subscription": self.subscription_name,
+                                "max_messages": 5,
+                            }
+                        )
+                        
+                        if response.received_messages:
+                            for received_message in response.received_messages:
+                                await self.process_message(received_message)
+                                
+                                # Acknowledge the message after processing
+                                self.subscriber.acknowledge(
+                                    request={
+                                        "subscription": self.subscription_name,
+                                        "ack_ids": [received_message.ack_id],
+                                    }
+                                )
+                    except Exception as e:
+                        logging.error(f"Error pulling messages: {e}")
                 
                 # Always check local files too (fallback or local-only mode)
                 message = self.check_local_tasks()

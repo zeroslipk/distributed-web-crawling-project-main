@@ -5,6 +5,7 @@ WORKDIR /app
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
+    curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -16,14 +17,20 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 COPY config/ ./config/
 COPY templates/ ./templates/
-RUN mkdir -p data/html data/search_requests data/search_results
+RUN mkdir -p data/html data/search_requests data/search_results data/state data/index data/urls/to_index data/urls/indexed data/urls/failed
 
 # Environment variables
 ENV GOOGLE_APPLICATION_CREDENTIALS=/app/config/distributed_crawler.json
 ENV COMPONENT_TYPE=master
+ENV PYTHONUNBUFFERED=1
+ENV LOG_LEVEL=INFO
 
 # Expose ports
 EXPOSE 8000
 
-# Run the master component
-CMD ["python", "-m", "src.gcloud_master"] 
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run the master component with gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "src.run_gcloud_crawler:app"] 

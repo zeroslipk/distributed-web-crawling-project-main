@@ -2,12 +2,12 @@
   "seed_urls": [
     "https://www.bbc.com/"
   ],
-  "max_depth": 3,
-  "max_pages_per_domain": 20,
+  "max_depth": 2,
+  "max_pages_per_domain": 10,
   "respect_robots": true,
   "crawl_delay": 1.0,
   "allowed_domains": [
-    "www.bbc.com/"
+    ""
   ],
-  "start_time": "2025-05-02T18:26:43.669433"
+  "start_time": "2026-02-12T17:13:23.672469"
 }

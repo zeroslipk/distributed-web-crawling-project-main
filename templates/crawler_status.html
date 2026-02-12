@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crawler Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .status-header { 
+            background-color: #00BFFF; 
+            color: white; 
+            padding: 10px 20px; 
+            margin: 0;
+            font-size: 24px;
+        }
+        .status-box {
+            background-color: #e6f7ff;
+            border-radius: 5px;
+            margin: 10px 20px;
+            padding: 20px;
+        }
+        .status-message {
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        // Auto-refresh status every 30 seconds
+        function fetchStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    const statusBox = document.getElementById('statusBox');
+                    if (data.status) {
+                        statusBox.innerHTML = `<p class="status-message">${data.status}</p>`;
+                    } else {
+                        statusBox.innerHTML = `<p class="status-message">No crawl in progress</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching status:', error);
+                });
+        }
+        
+        // Fetch status on page load and every 30 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchStatus();
+            setInterval(fetchStatus, 30000);
+        });
+    </script>
+</head>
+<body>
+    <h1 class="status-header">Crawler Status</h1>
+    <div id="statusBox" class="status-box">
+        <p class="status-message">No crawl in progress</p>
+    </div>
+</body>
+</html> 
