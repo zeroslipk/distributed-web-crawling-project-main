@@ -27,14 +27,12 @@ RUN mkdir -p logs
 # Set working directory to where the app can find src/
 WORKDIR /app
 
-# Expose the port (Render uses PORT env var, but we'll default to 8080)
-EXPOSE 8080
+# Expose the port (Hugging Face uses 7860, Render uses 8080)
+EXPOSE 7860
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1
-ENV PORT=8080
+ENV PORT=7860
 
-# Use Gunicorn for production
-# We need to tell gunicorn where the app is. In app.py it is just 'app'
-# We'll run it from the root directory so it can find 'templates/app.py'
-CMD gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 templates.app:app
+# Use Gunicorn for production in exec form
+CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--workers", "1", "--threads", "8", "--timeout", "0", "templates.app:app"]
